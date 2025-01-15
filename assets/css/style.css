@@ -6,6 +6,7 @@
 
 :root {
   --jaune: #F8F32B;
+  --jaune_fond: #F5EA61;
   --rose: #F4436C;
   --blanc: #F5F5F5;
   --fond_mode_jour: #FFFDF2;
@@ -42,6 +43,21 @@ body {
   font-weight: bold;
   color: var(--blanc);
   letter-spacing: 0.75px;
+}
+
+.titre_principal {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.sous-titre {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.texte {
+  font-size: 20px;
+  font-weight: normal;
 }
 /* ===== Fin éléments ===== */
 
@@ -274,14 +290,7 @@ body {
   padding-inline: var(--padding_bord);
 }
 
-#prenom {
-  font-size: 32px;
-  font-weight: bold;
-}
-
 #texte_introduction {
-  font-size: 16px;
-  font-weight: normal;
   margin-top: 20px;
 }
 /* ===== Fin introduction ===== */
@@ -299,26 +308,39 @@ body {
 }
 /* ===== Fin projets ===== */
 
+
+
 /* ===== Début qui suis-je ? ===== */
 #container_qui_suis_je {
   margin-top: 60px;
   padding-inline: var(--padding_bord);
 }
 
-#qui_suis_je {
-  font-size: 40px;
-  font-weight: bold;
-}
-
 #intro_qui_suis_je {
-  font-size: 20px;
-  font-weight: bold;
   margin-top: 40px;
 }
 
 #texte_qui_suis_je {
-  font-size: 20px;
-  font-weight: normal;
   margin-top: 40px;
 }
 /* ===== Fin qui suis-je ? ===== */
+
+
+
+/* ===== Début photo Erwan ===== */
+#image_erwan {
+  width: 100vw;
+}
+/* ===== Fin photo Erwan ===== */
+
+
+
+/* ===== Début vie pro / vie perso ===== */
+#container_qui_suis_je_pro_perso {
+  width: 100vw;
+  height: 1560px;
+  background: var(--jaune_fond);
+}
+
+#
+/* ===== Fin vie pro / vie perso ===== */
