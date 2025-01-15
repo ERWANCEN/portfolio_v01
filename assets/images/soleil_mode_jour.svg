@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Calque_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 512 512">
+  <!-- Generator: Adobe Illustrator 29.1.0, SVG Export Plug-In . SVG Version: 2.1.0 Build 142)  -->
+  <defs>
+    <style>
+      .st0, .st1 {
+        fill: none;
+        stroke: #000;
+        stroke-miterlimit: 10;
+        stroke-width: 19.6px;
+      }
+
+      .st1 {
+        stroke-linecap: round;
+      }
+    </style>
+  </defs>
+  <circle class="st0" cx="256" cy="255.6" r="122.9"/>
+  <line class="st1" x1="256" y1="94.9" x2="256" y2="14.6"/>
+  <line class="st1" x1="416.7" y1="255.6" x2="497" y2="255.6"/>
+  <line class="st1" x1="256" y1="416.4" x2="256" y2="496.7"/>
+  <line class="st1" x1="95.2" y1="255.6" x2="14.9" y2="255.6"/>
+  <line class="st1" x1="141.1" y1="143.1" x2="84.3" y2="86.3"/>
+  <line class="st1" x1="368.4" y1="140.7" x2="425.2" y2="83.9"/>
+  <line class="st1" x1="370.9" y1="368" x2="427.7" y2="424.8"/>
+  <line class="st1" x1="144.6" y1="371.6" x2="87.8" y2="428.4"/>
+</svg>
