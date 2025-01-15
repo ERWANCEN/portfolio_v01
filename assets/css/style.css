@@ -38,7 +38,7 @@ body {
   border-collapse: collapse;
   border: 0;
   background: var(--rose);
-  margin-top: 23px;
+  margin-top: 25px;
   font-size: 18px;
   font-weight: bold;
   color: var(--blanc);
@@ -50,7 +50,7 @@ body {
   font-weight: bold;
 }
 
-.sous-titre {
+.sous_titre {
   font-size: 20px;
   font-weight: bold;
 }
@@ -338,9 +338,53 @@ body {
 /* ===== Début vie pro / vie perso ===== */
 #container_qui_suis_je_pro_perso {
   width: 100vw;
-  height: 1560px;
   background: var(--jaune_fond);
+  padding-block: 60px;
 }
 
-#
+#container_qui_suis_je_pro_perso {
+  padding-inline: var(--padding_bord);
+}
+
+#dans_la_vie {
+  margin-top: 60px;
+}
+
+#texte_au_travail, #texte_dans_la_vie {
+  margin-top: 40px;
+}
 /* ===== Fin vie pro / vie perso ===== */
+
+
+
+/* ===== Début Compétences ===== */
+#container_compétences {
+  padding-inline: var(--padding_bord);
+}
+
+#compétences {
+  margin-top: 60px;
+}
+
+.sous_titre_competences {
+  margin-top: 60px;
+}
+
+.container_ligne_pointillee_et_logos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.ligne_pointillee {
+  width: 100%;
+  border-top: 1px dashed black;
+  margin-top: 3px;
+}
+
+#cta_compétences {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+/* ===== Fin compétences ===== */
