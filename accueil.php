@@ -8,14 +8,16 @@
         <header>
             <div id="container_header_tablette_desktop">
                 <img src="assets/images/logo_noir_sans_baseline.webp" alt="logo de Erwan CÉNAC" class="logo_nav_mode_jour" loading="lazy">
-                <?php include "inc/nav.inc.php"; ?>
-                <img src="assets/images/france.webp" alt="" class="mode_langue" loading="lazy">
-                <div class="toggle-switch">
-                    <label class="switch-label">
-                        <input type="checkbox" class="checkbox">
-                        <span class="slider"></span>
-                    </label>
-                </div>  
+                <div id="container_header">
+                    <?php include "inc/nav.inc.php"; ?>
+                    <img src="assets/images/france.webp" alt="" class="mode_langue" loading="lazy">
+                    <div class="toggle-switch">
+                        <label class="switch-label">
+                            <input type="checkbox" class="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>  
+                </div>
             </div>
 
             <div id="container_header_mobile">
@@ -58,7 +60,7 @@
             <div id="projets_grid">
                 <button id="projets_dev">dev</button>
                 <button id="projets_design">design</button>
-                <p id="texte_projets_dev">Découvrez mes projets en développement web, où la structure, la performance et l'interactivité sont au cœur de mes réalisations.</p>
+                <p class="texte" id="texte_projets_dev">Découvrez mes projets en développement web, où la structure, la performance et l'interactivité sont au cœur de mes réalisations.</p>
                 <div class="vignette_projet">
                     <div class="container_image_projet">
                         <img class="image_projet" src="assets/images/projets/antelope_canyon_01.jpeg" alt="">
@@ -86,6 +88,7 @@
                         <img class="fleche_droite" src="assets/images/fleche_droite.svg" alt="">
                     </div>
                 </div>
+                <button class="cta">Me contacter</button>
             </div>
         </div>
 
@@ -95,11 +98,11 @@
             <h2 id="qui_suis_je" class="titre_principal">Qui suis-je ?</h2>
             <h3 id="intro_qui_suis_je" class="sous_titre">Étudiant en Développement Web & Curieux des Nouvelles Technologies</h3>
             <p id="texte_qui_suis_je" class="texte">Actuellement en première année de spécialité Développement Web, je suis <b>passionné</b> par la création de sites et d’outils numériques. Avec un <b>intérêt grandissant pour l’</b><strong>intelligence artificielle</strong>, je découvre comment ces technologies peuvent <b>enrichir le développement web</b> et simplifier certains processus. Bien que je ne les incorpore pas encore directement dans mes projets, je m’y adapte pour être prêt à répondre aux évolutions de la profession. Polyvalent et motivé, je recherche un stage ou une alternance pour continuer à apprendre et contribuer à des projets innovants.</p>
+            <div id="photo_erwan">
+                <img id="image_erwan"src="assets/images/photo_erwan.webp" alt="Erwan souriant face à la caméra" loading="lazy">
+            </div>
         </div>
 
-        <div id="photo_erwan">
-            <img id="image_erwan"src="assets/images/photo_erwan.webp" alt="Erwan souriant face à la caméra" loading="lazy">
-        </div>
         
         <div id="container_qui_suis_je_pro_perso">
             <h2 id="au_travail" class="titre_principal">Au travail</h2>
