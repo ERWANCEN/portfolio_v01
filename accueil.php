@@ -7,9 +7,9 @@
 
         <header>
             <div id="container_header_tablette_desktop">
-                <img src="assets/images/logo_noir_sans_baseline.webp" alt="logo de Erwan CÉNAC" class="logo_nav_mode_jour">
+                <img src="assets/images/logo_noir_sans_baseline.webp" alt="logo de Erwan CÉNAC" class="logo_nav_mode_jour" loading="lazy">
                 <?php include "inc/nav.inc.php"; ?>
-                <img src="assets/images/france.webp" alt="" class="mode_langue">
+                <img src="assets/images/france.webp" alt="" class="mode_langue" loading="lazy">
                 <div class="toggle-switch">
                     <label class="switch-label">
                         <input type="checkbox" class="checkbox">
@@ -19,8 +19,8 @@
             </div>
 
             <div id="container_header_mobile">
-                <img src="assets/images/logo_noir_sans_baseline.webp" alt="logo de Erwan CÉNAC" class="logo_nav_mode_jour">
-                <img src="assets/images/france.webp" alt="" class="mode_langue">
+                <img src="assets/images/logo_noir_sans_baseline.webp" alt="logo de Erwan CÉNAC" class="logo_nav_mode_jour" loading="lazy">
+                <img src="assets/images/france.webp" alt="" class="mode_langue" loading="lazy">
 
                 <div class="toggle-switch">
                     <label class="switch-label">
@@ -51,9 +51,45 @@
             <button class="cta">Me contacter</button>
         </div>
 
-        <div id="container_projets">
 
+
+        <div id="container_projets">
+            <h2 id="mes_réalisations" class="titre_principal">Mes réalisations</h2>
+            <div id="projets_grid">
+                <button id="projets_dev">dev</button>
+                <button id="projets_design">design</button>
+                <p id="texte_projets_dev">Découvrez mes projets en développement web, où la structure, la performance et l'interactivité sont au cœur de mes réalisations.</p>
+                <div class="vignette_projet">
+                    <div class="container_image_projet">
+                        <img class="image_projet" src="assets/images/projets/antelope_canyon_01.jpeg" alt="">
+                    </div>
+                    <div class="bas_vignette">
+                        <h3 class="nom_du_projet">Projet 01</h3>
+                        <img class="fleche_droite" src="assets/images/fleche_droite.svg" alt="">
+                    </div>
+                </div>
+                <div class="vignette_projet">
+                    <div class="container_image_projet">
+                        <img class="image_projet" src="assets/images/projets/montgolfieres_01.jpeg" alt="">
+                    </div>
+                    <div class="bas_vignette">
+                        <h3 class="nom_du_projet">Projet 01</h3>
+                        <img class="fleche_droite" src="assets/images/fleche_droite.svg" alt="">
+                    </div>
+                </div>
+                <div class="vignette_projet">
+                    <div class="container_image_projet">
+                        <img class="image_projet" src="assets/images/projets/mont_fuji_01.jpeg" alt="">
+                    </div>
+                    <div class="bas_vignette">
+                        <h3 class="nom_du_projet">Projet 01</h3>
+                        <img class="fleche_droite" src="assets/images/fleche_droite.svg" alt="">
+                    </div>
+                </div>
+            </div>
         </div>
+
+
 
         <div id="container_qui_suis_je">
             <h2 id="qui_suis_je" class="titre_principal">Qui suis-je ?</h2>
@@ -62,7 +98,7 @@
         </div>
 
         <div id="photo_erwan">
-            <img id="image_erwan"src="assets/images/photo_erwan.webp" alt="Erwan souriant face à la caméra">
+            <img id="image_erwan"src="assets/images/photo_erwan.webp" alt="Erwan souriant face à la caméra" loading="lazy">
         </div>
         
         <div id="container_qui_suis_je_pro_perso">
@@ -78,45 +114,45 @@
             <h3 id="langages" class="sous_titre sous_titre_competences">Langages</h3>
             <div class="container_ligne_pointillee_et_logos">
             <div class="ligne_pointillee"></div>
-                <img id="html" src="assets/images/html.webp" alt="Logo du langage de balisage HTML." height="65px">
-                <img id="css" src="assets/images/css_nouveau_logo.webp" alt="Logo du langage informatique CSS." height="65px">
-                <img id="javascript" src="assets/images/javascript.webp" alt="Logo du langage de programmation JaveScript." height="65px">
-                <img id="php" src="assets/images/php.webp" alt="Logo du langage de programmation PHP." height="65px">
+                <img id="html" src="assets/images/html.webp" alt="Logo du langage de balisage HTML." height="65px" loading="lazy" title="HTML">
+                <img id="css" src="assets/images/css_nouveau_logo.webp" alt="Logo du langage informatique CSS." height="65px" loading="lazy" title="CSS">
+                <img id="javascript" src="assets/images/javascript.webp" alt="Logo du langage de programmation JaveScript." height="65px" loading="lazy" title="JavaScript">
+                <img id="php" src="assets/images/php.webp" alt="Logo du langage de programmation PHP." height="65px" loading="lazy" title="PHP">
             </div>
 
             <h3 id="frameworks" class="sous_titre sous_titre_competences">Frameworks</h3>
             <div class="container_ligne_pointillee_et_logos">
                 <div class="ligne_pointillee"></div>
-                <img id="vuejs" src="assets/images/vuejs.webp" alt="Logo du frameword JavaScript open-source VueJS." height="65px">
-                <img id="symfony" src="assets/images/symfony.webp" alt="Logo du framework modèle-vue-contrôleur Symfony." height="65px">
+                <img id="vuejs" src="assets/images/vuejs.webp" alt="Logo du frameword JavaScript open-source VueJS." height="65px" loading="lazy" title="VueJS">
+                <img id="symfony" src="assets/images/symfony.webp" alt="Logo du framework modèle-vue-contrôleur Symfony." height="65px" loading="lazy" title="Symfony">
             </div>
             
 
             <h3 id="sgbdr" class="sous_titre sous_titre_competences">SGBDR</h3>
             <div class="container_ligne_pointillee_et_logos">
                 <div class="ligne_pointillee"></div>
-                <img id="mysql" src="assets/images/mysql.webp" alt="Logo du système de gestion de bases de données MySQL." height="65px">
+                <img id="mysql" src="assets/images/mysql.webp" alt="Logo du système de gestion de bases de données MySQL." height="65px" loading="lazy" title="MySQL">
             </div>
             
             <h3 id="plateformes_web_collaboratives" class="sous_titre sous_titre_competences">Plateformes web collaboratives</h3>
             <div class="container_ligne_pointillee_et_logos">
                 <div class="ligne_pointillee"></div>
-                <img id="github" src="assets/images/github.webp" alt="Logo du service web d'hébergement et de gestion de développement de logiciels Github." height="65px">
+                <img id="github" src="assets/images/github.webp" alt="Logo du service web d'hébergement et de gestion de développement de logiciels Github." height="65px" loading="lazy" title="GitHub">
             </div>
 
             <h3 id="wordpress" class="sous_titre sous_titre_competences">WordPress</h3>
             <div class="container_ligne_pointillee_et_logos">
                 <div class="ligne_pointillee"></div>
-                <img id="wordpress" src="assets/images/wordpress.webp" alt="Logo du CMS (content management system) WordPress." height="65px">
+                <img id="wordpress" src="assets/images/wordpress.webp" alt="Logo du CMS (content management system) WordPress." height="65px" loading="lazy" title="WordPress">
             </div>
 
             <h3 id="outils_creatifs" class="sous_titre sous_titre_competences">Outils créatifs</h3>
             <div class="container_ligne_pointillee_et_logos">
                 <div class="ligne_pointillee"></div>
-                <img id="photoshop" src="assets/images/adobe_photoshop.webp" alt="Logo de l’application de retouche photo et design Photoshop." height="65px">
-                <img id="illustrator" src="assets/images/adobe_illustrator.webp" alt="Logo du logiciel de création graphique vectorielle Illustrator." height="65px">
-                <img id="indesign" src="assets/images/adobe_indesign.webp" alt="Logo de l'application de mise en page et PAO InDesign." height="65px">
-                <img id="figma" src="assets/images/figma.webp" alt="Logo de l'éditeur de graphiques vectoriels et outil de prototypage Figma." height="65px">
+                <img id="photoshop" src="assets/images/adobe_photoshop.webp" alt="Logo de l’application de retouche photo et design Photoshop." height="65px" loading="lazy" title="Photoshop">
+                <img id="illustrator" src="assets/images/adobe_illustrator.webp" alt="Logo du logiciel de création graphique vectorielle Illustrator." height="65px" loading="lazy" title="Illustrator">
+                <img id="indesign" src="assets/images/adobe_indesign.webp" alt="Logo de l'application de mise en page et PAO InDesign." height="65px" loading="lazy" title="InDesign">
+                <img id="figma" src="assets/images/figma.webp" alt="Logo de l'éditeur de graphiques vectoriels et outil de prototypage Figma." height="65px" loading="lazy" title="Figma">
             </div>
             <div id="cta_compétences">
                 <button class="cta">Me contacter</button>
