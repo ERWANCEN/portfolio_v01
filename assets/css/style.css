@@ -2,6 +2,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
 }
 
 :root {
@@ -18,18 +19,16 @@
 }
 
 body {
-  font-family: 'Outfit', sans-serif;
-  background: ;
+  /* font-family: 'Outfit', sans-serif; */
 }
 
 #container {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto  ;
-    max-width: 1440px; 
+    max-width: 1920px; 
     margin: 0 auto; 
     overflow: hidden;
-    margin-top: 20px;
 }
 
 
@@ -37,16 +36,19 @@ body {
 /* ===== Début éléments ===== */
 .cta {
   height: 55px;
-  width: 166px;
+  width: auto;
   border-radius: 5px;
   border-collapse: collapse;
   border: 0;
   background: var(--rose);
-  margin-top: 25px;
   font-size: 18px;
   font-weight: bold;
   color: var(--blanc);
   letter-spacing: 0.75px;
+  padding-inline: 25px;
+  grid-column: span 4;
+  margin: auto;
+  margin-block: 60px;
 }
 
 .titre_principal {
@@ -79,6 +81,7 @@ body {
     justify-content: space-between; 
     gap: 16px; 
     padding-inline: var(--padding_bord);
+    margin-block: 25px;
 }
 
 #nav_bar {
@@ -281,10 +284,9 @@ body {
 #container_projets {
   width: 100vw;
   background: black;
-  margin-top: 60px;
   border-radius: 35px 35px 0 0;
   padding-inline: var(--padding_bord);
-  padding-block: 60px;
+  padding-top: 60px;
 }
 
 #mes_réalisations {
@@ -448,11 +450,8 @@ body {
   background: var(--jaune_footer);
   width: 100vw;
   padding-block: 60px;
-  margin-top: 60px;
+  margin-top: 0;
   overflow: hidden;
-}
-
-#textes_et_cta_footer_jaune {
   padding-inline: var(--padding_bord);
 }
 
@@ -499,13 +498,11 @@ body {
 
 
 /* ===== Fin footer noir ===== */
-#fond_footer_noir {
+
+#container_footer_noir {
   background: black;
   width: 100vw;
   padding-block: 60px;
-}
-
-#container_footer_noir {
   padding-inline: var(--padding_bord);
 }
 
@@ -551,19 +548,19 @@ body {
 
     .cta {
       height: 65px;
-      width: 205px;
+      width: auto;
       border-radius: 5px;
       border-collapse: collapse;
       border: 0;
       background: var(--rose);
-      margin-top: 25px;
       font-size: 20px;
       font-weight: bold;
       color: var(--blanc);
       letter-spacing: 0.75px;
       grid-column: span 4;
       margin: auto;
-      margin-top: 60px;
+      margin-block: 60px;
+      padding-inline: 25px;
     }
 
     #container_header_tablette_desktop {
@@ -572,6 +569,7 @@ body {
       justify-content: space-between; 
       gap: 16px; 
       padding-inline: var(--padding_bord_tablette_desktop);
+      margin-block: 40px;
     }
 
     #container_header_mobile {
@@ -669,13 +667,243 @@ body {
     #image_erwan {
       max-width: 100%;
     }
-}
 
-/* Pour desktop */
-@media (min-width: 1200px) {
-  #container {
-      grid-template-columns: repeat(12, 1fr);
-      gap: 32px;
-      padding: 0 32px; /* Marges pour desktop */
+    #container_compétences {
+      padding-inline: var(--padding_bord_tablette_desktop);
+    }
+
+    /* Début footer */
+    #container_footer_jaune {
+      background: var(--jaune_footer);
+      width: 100vw;
+      padding-block: 60px;
+      margin-top: 60px;
+      overflow: hidden;
+      padding: var(--padding_bord_tablette_desktop);
+    }
+
+    #container_footer_noir {
+      background: black;
+      width: 100vw;
+      padding-block: 60px;
+      padding-inline: var(--padding_bord_tablette_desktop);
+    }
+    /* Fin footer */
   }
-}
+  
+  /* Pour desktop */
+  @media (min-width: 1200px) {
+    #container {
+      /* grid-template-columns: repeat(12, 1fr);
+      gap: 32px;
+      padding: 0 32px;  */
+    }
+    
+    .titre_principal {
+      font-size: 80px;
+      font-weight: bold;
+    }
+
+    .sous_titre {
+      font-size: 32px;
+      font-weight: bold;
+    }
+  
+    .texte {
+      font-size: 24px;
+      font-weight: normal;
+    }
+
+    .cta {
+      height: 75px;
+      width: auto;
+      border-radius: 5px;
+      border-collapse: collapse;
+      border: 0;
+      background: var(--rose);
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--blanc);
+      letter-spacing: 0.75px;
+      grid-column: span 4;
+      margin: auto;
+      margin-block: 60px;
+      padding-inline: 30px;
+    }
+
+  
+    #container_header_tablette_desktop {
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between; 
+      gap: 16px; 
+      padding-inline: var(--padding_bord_tablette_desktop);
+    }
+  
+    #container_header_mobile {
+      display: none;
+    }
+  
+    #container_header {
+      display: flex;
+      gap: 56px;
+      align-items: center;
+    }
+  
+    #nav {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+  
+    a {
+      text-decoration: none;
+      color: var(--noir);
+      font-size: 20px;
+    }
+  
+    #nav_bar {
+      position: relative;
+      margin-left: 0;
+    }
+  
+    #container_bandeau_deroulant {
+      position: relative;
+      height: 106px;
+      margin-top: 45px;
+      transform: rotate(-45deg) translate(-30px, 430px);
+      z-index: 1;
+    }
+  
+    #container_introduction {
+      margin-top: -103px;
+      padding-inline: var(--padding_bord_tablette_desktop);
+      width: 900px;
+    }
+  
+    #projets_dev {
+      grid-column: span 2;
+      height: 100px;
+      border-radius: 5px;
+      font-size: 48px;
+      background: var(--blanc);
+    }
+  
+    #projets_design {
+      grid-column: span 2;
+      height: 100px;
+      border-radius: 5px;
+      font-size: 48px;
+      background: none;
+      color: var(--blanc);
+      border: 2px solid var(--blanc);
+    }
+  
+    .vignette_projet {
+      grid-column: span 2;
+    }
+  
+    .container_image_projet {
+      width: 100%;
+      height: 330px;
+      overflow: hidden;
+      border-radius: 30px 30px 0 0;
+      margin-top: 60px;
+    }
+
+    .bas_vignette {
+      height: 110px;
+      background: #393939;
+      border-radius: 0 0 30px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-inline: 20px;
+    }
+
+    .nom_du_projet {
+      font-size: 40px;
+      font-weight: bold;
+      color: var(--blanc);
+    }
+
+    .fleche_droite {
+      height: 60px;
+    }
+  
+    #container_qui_suis_je, #container_qui_suis_je_pro_perso {
+      margin-top: 60px;
+      padding-inline: 0;
+      padding-left: 32px;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+    }
+  
+    #qui_suis_je, #intro_qui_suis_je, #texte_qui_suis_je, #au_travail, #texte_au_travail, #dans_la_vie, #texte_dans_la_vie {
+      grid-column: span 4;
+    }
+  
+    #photo_erwan {
+      grid-column: span 2;
+    }
+  
+    #image_erwan {
+      max-width: 100%;
+    }
+  
+    #container_compétences {
+      padding-inline: var(--padding_bord_tablette_desktop);
+    }
+
+    .logos_langages {
+      height: 85px;
+    }
+
+    .container_ligne_pointillee_et_logos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;      
+    }
+  
+    /* Début footer */
+    #container_footer_jaune {
+      background: var(--jaune_footer);
+      width: 100vw;
+      padding-block: 60px;
+      margin-top: 0;
+      overflow: hidden;
+      padding: var(--padding_bord_tablette_desktop);
+    }
+
+    .projet_stage_ou_alternance {
+      font-size: 64px;
+      font-weight: bold;
+    }
+
+    #cta_contacter_footer {
+      font-size: 48px;
+      font-weight: bold;
+      color: black;
+    }
+  
+    #container_footer_noir {
+      background: black;
+      width: 100vw;
+      padding-block: 60px;
+      padding-inline: var(--padding_bord_tablette_desktop);
+    }
+
+    #erwan_footer {
+      font-size: 64px;
+      font-weight: bold;
+      color: var(--fond_mode_jour);
+    }
+
+    .ml_pdc {
+      font-size: 20px;
+      font-weight: bold;
+      color: var(--fond_mode_jour);
+    }
+    /* Fin footer */
+    
+  }
