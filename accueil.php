@@ -50,7 +50,7 @@
             <h2 id="prenom" class="titre_principal">Erwan CÉNAC</h2>
             <h1 id="texte_introduction" class="texte">Actuellement à la recherche d’un <strong>stage</strong> et d’une <strong>alternance</strong>.
             Entre <strong>technique</strong> et <strong>design</strong>, <strong>je m'adapte aux besoins du web moderne</strong> avec une <strong>curiosité</strong> pour les <strong>outils innovants</strong>.</h1>
-            <button class="cta">Me contacter</button>
+            <a id="bouton_intro_me_contacter" class="cta" href="./contact.php">Me contacter</a>
         </div>
 
 
@@ -88,7 +88,7 @@
                         <img class="fleche_droite" src="assets/images/fleche_droite.svg" alt="">
                     </div>
                 </div>
-                <button class="cta">Voir tous les projets</button>
+                <a class="cta" href="projets.php">Voir tous les projets</a>
             </div>
         </div>
 

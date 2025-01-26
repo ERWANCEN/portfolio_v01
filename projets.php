@@ -54,7 +54,7 @@
                 </div>
                 <div class="bas_vignette">
                     <h3 class="nom_du_projet">Projet 01</h3>
-                    <img class="fleche_droite" src="assets/images/fleche_droite.svg" alt="">
+                    <a><img class="fleche_droite" src="assets/images/fleche_droite.svg" alt=""></a>
                 </div>
             </div>
             <div class="vignette_projet">
@@ -63,7 +63,7 @@
                 </div>
                 <div class="bas_vignette">
                     <h3 class="nom_du_projet">Projet 02</h3>
-                    <img class="fleche_droite" src="assets/images/fleche_droite.svg" alt="">
+                    <a><img class="fleche_droite" src="assets/images/fleche_droite.svg" alt=""></a>
                 </div>
             </div>
             <div class="vignette_projet">
@@ -72,7 +72,7 @@
                 </div>
                 <div class="bas_vignette">
                     <h3 class="nom_du_projet">Projet 03</h3>
-                    <img class="fleche_droite" src="assets/images/fleche_droite.svg" alt="">
+                    <a><img class="fleche_droite" src="assets/images/fleche_droite.svg" alt=""></a>
                 </div>
             </div>
             <div class="vignette_projet">
@@ -81,7 +81,7 @@
                 </div>
                 <div class="bas_vignette">
                     <h3 class="nom_du_projet">Projet 04</h3>
-                    <img class="fleche_droite" src="assets/images/fleche_droite.svg" alt="">
+                    <a><img class="fleche_droite" src="assets/images/fleche_droite.svg" alt=""></a>
                 </div>
             </div>
             <div class="vignette_projet">
@@ -90,7 +90,7 @@
                 </div>
                 <div class="bas_vignette">
                     <h3 class="nom_du_projet">Projet 05</h3>
-                    <img class="fleche_droite" src="assets/images/fleche_droite.svg" alt="">
+                    <a><img class="fleche_droite" src="assets/images/fleche_droite.svg" alt=""></a>
                 </div>
             </div>
             <div class="vignette_projet">
@@ -99,7 +99,7 @@
                 </div>
                 <div class="bas_vignette">
                     <h3 class="nom_du_projet">Projet 06</h3>
-                    <img class="fleche_droite" src="assets/images/fleche_droite.svg" alt="">
+                    <a><img class="fleche_droite" src="assets/images/fleche_droite.svg" alt=""></a>
                 </div>
             </div>
             <div class="vignette_projet">
@@ -108,10 +108,13 @@
                 </div>
                 <div class="bas_vignette">
                     <h3 class="nom_du_projet">Projet 07</h3>
-                    <img class="fleche_droite" src="assets/images/fleche_droite.svg" alt="">
+                    <a><img class="fleche_droite" src="assets/images/fleche_droite.svg" alt=""></a>
                 </div>
             </div>
-            <button class="cta">Accéder au repos GitHub</button>
+            <a id="bouton_repos_github" href="https://github.com/ERWANCEN?tab=repositories" target="_blank" rel="noopener noreferrer">
+                <!-- <button class="cta">Accéder au repos GitHub</button> -->
+                Accéder au repos GitHub
+            </a>
         </div>
     </div>
 

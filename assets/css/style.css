@@ -65,6 +65,12 @@ body {
   font-size: 20px;
   font-weight: normal;
 }
+
+a {
+  text-decoration: none;
+  color: var(--noir);
+  font-size: 20px;
+}
 /* ===== Fin éléments ===== */
 
 #container_header_tablette_desktop {
@@ -268,9 +274,23 @@ body {
 
 
 /* ===== Début introduction ===== */
+
 #container_introduction {
   margin-top: 45px;
   padding-inline: var(--padding_bord);
+  width: 560px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+#prenom, #texte_introduction, #bouton_intro_me_contacter {
+  grid-column: span 4;
+}
+
+#bouton_intro_me_contacter {
+  margin-left: 0;
+  display: flex;
+  align-items: center;    
 }
 
 #texte_introduction {
@@ -533,6 +553,38 @@ body {
 }
 /* ===== Fin footer noir ===== */
 
+/* ===== Début page contact ===== */
+#formulaire_de_contact {
+  padding-inline: var(--padding_bord);
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+
+#titre_contact {
+  grid-column: span 6;
+  margin-bottom: 40px;
+}
+
+#champ_nom, #champ_email, #champ_message {
+  grid-column: 2 / span 4;
+}
+
+.input_form {
+  width: 100%;
+  margin-block: 10px 40px;
+  /* Soit */
+  /* border-collapse: collapse;
+  border: 1px solid black;
+  border-radius: 5px;
+  height: 25px;
+  background: var(--jaune_footer); */
+  /* Soit */
+  border-collapse: collapse;
+  border: 0;
+  border-bottom: 1px solid black;
+}
+/* ===== Fin page contact ===== */
+
 /* Pour tablette */
 @media (min-width: 744px) {
   #container {
@@ -616,6 +668,18 @@ body {
       margin-top: -103px;
       padding-inline: var(--padding_bord_tablette_desktop);
       width: 560px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    #prenom, #texte_introduction, #bouton_intro_me_contacter {
+      grid-column: span 4;
+    }
+
+    #bouton_intro_me_contacter {
+      margin-left: 0;
+      display: flex;
+      align-items: center;    
     }
 
     #projets_dev {
@@ -677,7 +741,6 @@ body {
       background: var(--jaune_footer);
       width: 100vw;
       padding-block: 60px;
-      margin-top: 60px;
       overflow: hidden;
       padding: var(--padding_bord_tablette_desktop);
     }
@@ -689,6 +752,12 @@ body {
       padding-inline: var(--padding_bord_tablette_desktop);
     }
     /* Fin footer */
+
+    /* Début page contact */
+    label {
+      font-size: 20px;
+    }
+    /* Fin page contact */
   }
   
   /* Pour desktop */
@@ -729,6 +798,8 @@ body {
       margin: auto;
       margin-block: 60px;
       padding-inline: 30px;
+      display: flex;
+      align-items: center;
     }
 
   
@@ -779,6 +850,16 @@ body {
       margin-top: -103px;
       padding-inline: var(--padding_bord_tablette_desktop);
       width: 900px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    #prenom, #texte_introduction {
+      grid-column: span 4;
+    }
+
+    #bouton_intro_me_contacter {
+      margin-left: 0;
     }
   
     #projets_dev {
@@ -829,6 +910,25 @@ body {
 
     .fleche_droite {
       height: 60px;
+    }
+
+    #bouton_repos_github {
+      height: 75px;
+      width: auto;
+      border-radius: 5px;
+      border-collapse: collapse;
+      border: 0;
+      background: var(--rose);
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--blanc);
+      letter-spacing: 0.75px;
+      grid-column: span 4;
+      margin: auto;
+      margin-block: 60px;
+      padding-inline: 30px;
+      display: flex;
+      align-items: center;
     }
   
     #container_qui_suis_je, #container_qui_suis_je_pro_perso {
@@ -906,4 +1006,26 @@ body {
     }
     /* Fin footer */
     
+    /* Début page contact */
+    /* #formulaire_de_contact {
+      padding-inline: var(--padding_bord_tablette_desktop);
+    } */
+
+    .input_form {
+      width: 100%;
+      margin-block: 10px 60px;
+      border-collapse: collapse;
+      border: 0;
+      border-bottom: 1px solid black;
+    }
+    
+    #titre_contact {
+      grid-column: span 6;
+      margin-bottom: 60px;
+    }
+
+    label {
+      font-size: 24px;
+    }
+    /* Fin page contact */
   }
