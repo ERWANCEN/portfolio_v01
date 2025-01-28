@@ -3,19 +3,37 @@
 
 </head>
 <body>
-    <div id="container">
+    <div id="container_general">
 
         <header>
             <div id="container_header_tablette_desktop">
-                <img src="assets/images/logo_noir_sans_baseline.webp" alt="logo de Erwan CÉNAC" class="logo_nav_mode_jour" loading="lazy">
+                <img class="logo_nav_mode_jour" src="assets/images/logo_noir_sans_baseline.webp" alt="logo de Erwan CÉNAC" loading="lazy">
                 <div id="container_header">
                     <?php include "inc/nav.inc.php"; ?>
                     <img src="assets/images/france.webp" alt="" class="mode_langue" loading="lazy">
                     <div class="toggle-switch">
-                        <label class="switch-label">
+                        <!-- <label class="switch-label">
                             <input type="checkbox" class="checkbox">
                             <span class="slider"></span>
-                        </label>
+                        </label> -->
+                        <!-- From Uiverse.io by Creatlydev --> 
+                        <div class="container">
+                            <label class="toggle" for="switch">
+                                <input id="switch" class="input" type="checkbox">
+                                
+                                <div class="icon icon--sun">
+                                    <svg height="24" width="24" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path clip-rule="evenodd" d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z" fill-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+
+                                <div class="icon icon--moon">
+                                    <svg height="24" width="24" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z"></path>
+                                    </svg>
+                                </div>
+                            </label>
+                        </div>
                     </div>  
                 </div>
             </div>
@@ -24,12 +42,30 @@
                 <img src="assets/images/logo_noir_sans_baseline.webp" alt="logo de Erwan CÉNAC" class="logo_nav_mode_jour" loading="lazy">
                 <img src="assets/images/france.webp" alt="" class="mode_langue" loading="lazy">
 
-                <div class="toggle-switch">
+                <!-- <div class="toggle-switch">
                     <label class="switch-label">
                         <input type="checkbox" class="checkbox">
                         <span class="slider"></span>
                     </label>
-                </div> 
+                </div>  -->
+
+                <!-- From Uiverse.io by Creatlydev --> 
+                <div class="container">
+                    <label class="toggle" for="switch">
+                        <input id="switch" class="input" type="checkbox">
+                        <div class="icon icon--moon">
+                            <svg height="32" width="32" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path clip-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" fill-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                    
+                        <div class="icon icon--sun">
+                            <svg height="32" width="32" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"></path>
+                            </svg>
+                        </div>
+                    </label>
+                </div>
 
                 <label class="burger" for="burger">
                     <input type="checkbox" id="burger">
@@ -42,13 +78,13 @@
 
         <div id="container_bandeau_deroulant">
             <div class="bande_jaune" id="bande_jaune_haut"></div>
-            <p id="texte_deroulant" class="texte">Recherche stage et alternance</p>
-            <div class="bande_jaune" id="bande_jaune_bas"></div>
+            <p id="texte_deroulant" class="texte texte_dark_mode">Recherche stage et alternance</p>
+            <div id="bande_jaune_bas" class="bande_jaune"></div>
         </div>
 
         <div id="container_introduction">
-            <h2 id="prenom" class="titre_principal">Erwan CÉNAC</h2>
-            <h1 id="texte_introduction" class="texte">Actuellement à la recherche d’un <strong>stage</strong> et d’une <strong>alternance</strong>.
+            <h2 id="prenom" class="titre_principal texte_dark_mode">Erwan CÉNAC</h2>
+            <h1 id="texte_introduction" class="texte texte_dark_mode">Actuellement à la recherche d’un <strong>stage</strong> et d’une <strong>alternance</strong>.
             Entre <strong>technique</strong> et <strong>design</strong>, <strong>je m'adapte aux besoins du web moderne</strong> avec une <strong>curiosité</strong> pour les <strong>outils innovants</strong>.</h1>
             <a id="bouton_intro_me_contacter" class="cta" href="./contact.php">Me contacter</a>
         </div>
@@ -95,9 +131,9 @@
 
 
         <div id="container_qui_suis_je">
-            <h2 id="qui_suis_je" class="titre_principal">Qui suis-je ?</h2>
-            <h3 id="intro_qui_suis_je" class="sous_titre">Étudiant en Développement Web & Curieux des Nouvelles Technologies</h3>
-            <p id="texte_qui_suis_je" class="texte">Actuellement en première année de spécialité Développement Web, je suis <b>passionné</b> par la création de sites et d’outils numériques. Avec un <b>intérêt grandissant pour l’</b><strong>intelligence artificielle</strong>, je découvre comment ces technologies peuvent <b>enrichir le développement web</b> et simplifier certains processus. Bien que je ne les incorpore pas encore directement dans mes projets, je m’y adapte pour être prêt à répondre aux évolutions de la profession. Polyvalent et motivé, je recherche un stage ou une alternance pour continuer à apprendre et contribuer à des projets innovants.</p>
+            <h2 id="qui_suis_je" class="titre_principal texte_dark_mode">Qui suis-je ?</h2>
+            <h3 id="intro_qui_suis_je" class="sous_titre texte_dark_mode">Étudiant en Développement Web & Curieux des Nouvelles Technologies</h3>
+            <p id="texte_qui_suis_je" class="text texte_dark_mode">Actuellement en première année de spécialité Développement Web, je suis <b>passionné</b> par la création de sites et d’outils numériques. Avec un <b>intérêt grandissant pour l’</b><strong>intelligence artificielle</strong>, je découvre comment ces technologies peuvent <b>enrichir le développement web</b> et simplifier certains processus. Bien que je ne les incorpore pas encore directement dans mes projets, je m’y adapte pour être prêt à répondre aux évolutions de la profession. Polyvalent et motivé, je recherche un stage ou une alternance pour continuer à apprendre et contribuer à des projets innovants.</p>
             <div id="photo_erwan">
                 <img id="image_erwan"src="assets/images/photo_erwan.webp" alt="Erwan souriant face à la caméra" loading="lazy">
             </div>
@@ -112,46 +148,46 @@
         </div>
 
         <div id="container_compétences">
-            <h2 id="compétences" class="titre_principal">Mes compétences</h2>
+            <h2 id="compétences" class="titre_principal texte_dark_mode">Mes compétences</h2>
 
-            <h3 id="langages" class="sous_titre sous_titre_competences">Langages</h3>
+            <h3 id="langages" class="sous_titre sous_titre_competences texte_dark_mode">Langages</h3>
             <div class="container_ligne_pointillee_et_logos">
-            <div class="ligne_pointillee"></div>
+            <div class="ligne_pointillee texte_dark_mode"></div>
                 <img id="html" class="logos_langages" src="assets/images/html.webp" alt="Logo du langage de balisage HTML." height="65px" loading="lazy" title="HTML">
                 <img id="css" class="logos_langages" src="assets/images/css_nouveau_logo.webp" alt="Logo du langage informatique CSS." height="65px" loading="lazy" title="CSS">
                 <img id="javascript" class="logos_langages" src="assets/images/javascript.webp" alt="Logo du langage de programmation JaveScript." height="65px" loading="lazy" title="JavaScript">
                 <img id="php" class="logos_langages" src="assets/images/php.webp" alt="Logo du langage de programmation PHP." height="65px" loading="lazy" title="PHP">
             </div>
 
-            <h3 id="frameworks" class="sous_titre sous_titre_competences">Frameworks</h3>
+            <h3 id="frameworks" class="sous_titre sous_titre_competences texte_dark_mode">Frameworks</h3>
             <div class="container_ligne_pointillee_et_logos">
-                <div class="ligne_pointillee"></div>
+                <div class="ligne_pointillee texte_dark_mode"></div>
                 <img id="vuejs" class="logos_langages" src="assets/images/vuejs.webp" alt="Logo du frameword JavaScript open-source VueJS." height="65px" loading="lazy" title="VueJS">
                 <img id="symfony" class="logos_langages" src="assets/images/symfony.webp" alt="Logo du framework modèle-vue-contrôleur Symfony." height="65px" loading="lazy" title="Symfony">
             </div>
             
 
-            <h3 id="sgbdr" class="sous_titre sous_titre_competences">SGBDR</h3>
+            <h3 id="sgbdr" class="sous_titre sous_titre_competences texte_dark_mode">SGBDR</h3>
             <div class="container_ligne_pointillee_et_logos">
-                <div class="ligne_pointillee"></div>
+                <div class="ligne_pointillee texte_dark_mode"></div>
                 <img id="mysql" class="logos_langages" src="assets/images/mysql.webp" alt="Logo du système de gestion de bases de données MySQL." height="65px" loading="lazy" title="MySQL">
             </div>
             
-            <h3 id="plateformes_web_collaboratives" class="sous_titre sous_titre_competences">Plateformes web collaboratives</h3>
+            <h3 id="plateformes_web_collaboratives" class="sous_titre sous_titre_competences texte_dark_mode">Plateformes web collaboratives</h3>
             <div class="container_ligne_pointillee_et_logos">
-                <div class="ligne_pointillee"></div>
+                <div class="ligne_pointillee texte_dark_mode"></div>
                 <img id="github" class="logos_langages" src="assets/images/github.webp" alt="Logo du service web d'hébergement et de gestion de développement de logiciels Github." height="65px" loading="lazy" title="GitHub">
             </div>
 
-            <h3 id="wordpress" class="sous_titre sous_titre_competences">WordPress</h3>
+            <h3 id="wordpress" class="sous_titre sous_titre_competences texte_dark_mode">WordPress</h3>
             <div class="container_ligne_pointillee_et_logos">
-                <div class="ligne_pointillee"></div>
+                <div class="ligne_pointillee texte_dark_mode"></div>
                 <img id="wordpress" class="logos_langages" src="assets/images/wordpress.webp" alt="Logo du CMS (content management system) WordPress." height="65px" loading="lazy" title="WordPress">
             </div>
 
-            <h3 id="outils_creatifs" class="sous_titre sous_titre_competences">Outils créatifs</h3>
+            <h3 id="outils_creatifs" class="sous_titre sous_titre_competences texte_dark_mode">Outils créatifs</h3>
             <div class="container_ligne_pointillee_et_logos">
-                <div class="ligne_pointillee"></div>
+                <div class="ligne_pointillee texte_dark_mode"></div>
                 <img id="photoshop" class="logos_langages" src="assets/images/adobe_photoshop.webp" alt="Logo de l’application de retouche photo et design Photoshop." height="65px" loading="lazy" title="Photoshop">
                 <img id="illustrator" class="logos_langages" src="assets/images/adobe_illustrator.webp" alt="Logo du logiciel de création graphique vectorielle Illustrator." height="65px" loading="lazy" title="Illustrator">
                 <img id="indesign" class="logos_langages" src="assets/images/adobe_indesign.webp" alt="Logo de l'application de mise en page et PAO InDesign." height="65px" loading="lazy" title="InDesign">
