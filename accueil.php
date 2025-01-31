@@ -42,8 +42,8 @@
 
         <div id="container_introduction">
             <h2 id="prenom" class="titre_principal texte_dark_mode">Erwan CÉNAC</h2>
-            <h1 id="texte_introduction" class="texte texte_dark_mode">Actuellement à la recherche d’un <strong>stage</strong> et d’une <strong>alternance</strong>.
-            Entre <strong>technique</strong> et <strong>design</strong>, <strong>je m'adapte aux besoins du web moderne</strong> avec une <strong>curiosité</strong> pour les <strong>outils innovants</strong>.</h1>
+            <h1 id="texte_introduction" class="texte texte_dark_mode">Actuellement à la recherche d’un stage et d’une alternance.
+            Entre technique et design, je m'adapte aux besoins du web moderne avec une curiosité pour les outils innovants.</h1>
             <a id="bouton_intro_me_contacter" class="cta" href="./contact.php">Me contacter</a>
         </div>
 
@@ -91,7 +91,7 @@
         <div id="container_qui_suis_je">
             <h2 id="qui_suis_je" class="titre_principal texte_dark_mode">Qui suis-je ?</h2>
             <h3 id="intro_qui_suis_je" class="sous_titre texte_dark_mode">Étudiant en Développement Web & Curieux des Nouvelles Technologies</h3>
-            <p id="texte_qui_suis_je" class="text texte_dark_mode">Actuellement en première année de spécialité Développement Web, je suis <b>passionné</b> par la création de sites et d’outils numériques. Avec un <b>intérêt grandissant pour l’</b><strong>intelligence artificielle</strong>, je découvre comment ces technologies peuvent <b>enrichir le développement web</b> et simplifier certains processus. Bien que je ne les incorpore pas encore directement dans mes projets, je m’y adapte pour être prêt à répondre aux évolutions de la profession. Polyvalent et motivé, je recherche un stage ou une alternance pour continuer à apprendre et contribuer à des projets innovants.</p>
+            <p id="texte_qui_suis_je" class="text texte_dark_mode">Actuellement en première année de spécialité Développement Web, je suis passionné par la création de sites et d’outils numériques. Avec un intérêt grandissant pour l’intelligence artificielle, je découvre comment ces technologies peuvent enrichir le développement web et simplifier certains processus. Bien que je ne les incorpore pas encore directement dans mes projets, je m’y adapte pour être prêt à répondre aux évolutions de la profession. Polyvalent et motivé, je recherche un stage ou une alternance pour continuer à apprendre et contribuer à des projets innovants.</p>
             <div id="photo_erwan">
                 <img id="image_erwan"src="assets/images/photo_erwan.webp" alt="Erwan souriant face à la caméra" loading="lazy">
             </div>
@@ -134,13 +134,14 @@
             <h3 id="plateformes_web_collaboratives" class="sous_titre sous_titre_competences texte_dark_mode">Plateformes web collaboratives</h3>
             <div class="container_ligne_pointillee_et_logos">
                 <div class="ligne_pointillee texte_dark_mode"></div>
-                <img id="github" class="logos_langages" src="assets/images/github.webp" alt="Logo du service web d'hébergement et de gestion de développement de logiciels Github." height="65px" loading="lazy" title="GitHub">
+                <img id="logo_github" class="logos_langages" src="assets/images/github.webp" alt="Logo GitHub" height="65px" loading="lazy" title="GitHub">
+
             </div>
 
             <h3 id="wordpress" class="sous_titre sous_titre_competences texte_dark_mode">WordPress</h3>
             <div class="container_ligne_pointillee_et_logos">
                 <div class="ligne_pointillee texte_dark_mode"></div>
-                <img id="wordpress" class="logos_langages" src="assets/images/wordpress.webp" alt="Logo du CMS (content management system) WordPress." height="65px" loading="lazy" title="WordPress">
+                <img id="wordpress_logo" class="logos_langages" src="assets/images/wordpress.webp" alt="Logo du CMS (content management system) WordPress." height="65px" loading="lazy" title="WordPress">
             </div>
 
             <h3 id="outils_creatifs" class="sous_titre sous_titre_competences texte_dark_mode">Outils créatifs</h3>

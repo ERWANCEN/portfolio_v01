@@ -23,6 +23,7 @@
 body {
   /* font-family: 'Outfit', sans-serif; */
   background: var(--fond_mode_jour);
+  transition: background-color 1s ease-in-out;
 }
 
 #container_general {
@@ -126,6 +127,11 @@ a {
 }
 
 /* ===== Mode jour/nuit ===== */
+body.nuit {
+  background: var(--fond_mode_nuit);
+  transition: background-color 1s ease-in-out;
+}
+
 #mode_jour_nuit_container {
   position: relative;
   width: 40px;
@@ -476,6 +482,11 @@ a {
   justify-content: center;
   margin-top: 35px;
 }
+
+#logo_github {
+  transition: opacity 1s ease-in-out;
+}
+
 /* ===== Fin compétences ===== */
 
 
