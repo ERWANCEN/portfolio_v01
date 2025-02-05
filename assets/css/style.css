@@ -16,8 +16,13 @@
   --noir: #000;
   --fond_mode_jour: #FFFDF2;
   --fond_mode_nuit: #1A1A2E;
+  --transition-standard: 1s ease-in-out;
   --padding_bord: 16px;
   --padding_bord_tablette_desktop: 32px;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -50,26 +55,11 @@ body {
   color: var(--blanc);
   letter-spacing: 0.75px;
   padding-inline: 25px;
-  grid-column: span 4;
+  grid-column: span 6;
   margin: auto;
   margin-block: 60px;
-}
-
-.cta:hover {
-  height: 55px;
-  width: auto;
-  border-radius: 5px;
-  border-collapse: collapse;
-  border: 0;
-  background: var(--rose_hover);
-  font-size: 18px;
-  font-weight: bold;
-  color: var(--blanc);
-  letter-spacing: 0.75px;
-  padding-inline: 25px;
-  grid-column: span 4;
-  margin: auto;
-  margin-block: 60px;
+  display: flex;
+  align-items: center;
 }
 
 .titre_principal {
@@ -93,23 +83,22 @@ a {
   font-size: 20px;
 }
 /* ===== Fin éléments ===== */
-
-#container_header_tablette_desktop {
-    display: flex; 
-    align-items: center; 
-    justify-content: space-between; 
-    gap: 16px; 
-    display: none;
-    z-index: 3;
+.container_header_tablette_desktop,
+.container_header_mobile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100vw;
 }
 
-#container_header_mobile {
-    display: flex; 
-    align-items: center; 
-    justify-content: space-between; 
-    gap: 16px; 
-    padding-inline: var(--padding_bord);
-    margin-block: 25px;
+.container_header_tablette_desktop {
+  display: none;
+}
+
+.container_header_mobile {
+  padding-inline: var(--padding_bord);
+  margin-block: 25px;
 }
 
 #nav_bar {
@@ -118,61 +107,76 @@ a {
 }
 
 .logo_nav_mode_jour {
-    height: 60px;
-    border-radius: 5px;
+  height: 60px;
+  border-radius: 5px;
 }
 
 .mode_langue {
-    height: 40px;
+  height: 40px;
 }
 
 /* ===== Mode jour/nuit ===== */
 body.nuit {
   background: var(--fond_mode_nuit);
-  transition: background-color 1s ease-in-out;
+  transition: background-color var(--transition-standard);
 }
 
-#mode_jour_nuit_container {
+.mode_jour_nuit_container {
   position: relative;
   width: 40px;
   height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%; 
-  background-color: var(--fond_mode_nuit); 
-  transition: background-color 1s ease, transform 1s ease; 
+  border-radius: 50%;
+  background-color: var(--fond_mode_nuit);
+  transition: background-color var(--transition-standard), transform var(--transition-standard);
   overflow: hidden;
   z-index: 2;
 }
 
-#mode_jour_nuit_container.nuit {
+.mode_jour_nuit_container.nuit {
   background-color: var(--fond_mode_jour);
 }
 
-#mode_jour_nuit {
+.mode_jour_nuit {
   height: 25px;
 }
 
-.logo_nav_mode_jour {
-  transition: opacity 1s ease-in-out;
+.logo_nav_mode_jour,
+.logo_nav_mode_nuit {
+  transition: opacity var(--transition-standard);
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  height: auto;
+}
+
+.logo_nav_mode_jour.logo_visible,
+.logo_nav_mode_nuit.logo_visible {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .texte_dark_mode {
   color: var(--noir);
-  transition: color 1s ease-in-out;
+  transition: color var(--transition-standard);
 }
 
-.nuit {
+.texte_dark_mode.nuit {
   color: var(--blanc);
 }
 
-#logo_container {
+.ligne_pointille.nuit {
+  border-top: 1px dashed white;
+}
+
+.logo_container {
   position: relative;
   width: 60px;
 }
 
-#logo_container img {
+.logo_container img {
   position: absolute;
   top: -30px;
   left: 0;
@@ -184,14 +188,14 @@ body.nuit {
   border-radius: 5px;
 }
 
-#logo_container .logo_visible {
+.logo_container .logo_visible {
   opacity: 1; /* Le logo visible a une opacité à 1 */
   pointer-events: auto; /* Permet d'interagir avec le logo visible */
 }
 
 /* ===== Fin mode jour/nuit ===== */
 
-/* ===== Bouton ===== */
+/* ===== Burger ===== */
 .burger {
     position: relative;
     width: 40px;
@@ -251,7 +255,7 @@ body.nuit {
     top: 28px;
     left: 5px;
   }
-/* ===== Fin bouton ===== */
+/* ===== Fin burger ===== */
 
 
 /* ===== Début bandeau déroulant ===== */
@@ -401,6 +405,25 @@ body.nuit {
 .fleche_droite {
   height: 40px;
 }
+
+#bouton_repos_github {
+  height: 75px;
+  width: auto;
+  border-radius: 5px;
+  border-collapse: collapse;
+  border: 0;
+  background: var(--rose);
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--blanc);
+  letter-spacing: 0.75px;
+  grid-column: span 4;
+  margin: auto;
+  margin-block: 60px;
+  padding-inline: 30px;
+  display: flex;
+  align-items: center;
+}
 /* ===== Fin projets ===== */
 
 
@@ -409,6 +432,7 @@ body.nuit {
 #container_qui_suis_je {
   margin-top: 60px;
   padding-inline: var(--padding_bord);
+  width: 100vw;
 }
 
 #intro_qui_suis_je {
@@ -453,8 +477,9 @@ body.nuit {
 
 
 /* ===== Début Compétences ===== */
-#container_compétences {
+#container_competences {
   padding-inline: var(--padding_bord);
+  width: 100vw;
 }
 
 #compétences {
@@ -465,13 +490,13 @@ body.nuit {
   margin-top: 60px;
 }
 
-.container_ligne_pointillee_et_logos {
+.container_ligne_pointille_et_logos {
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
 }
 
-.ligne_pointillee {
+.ligne_pointille {
   width: 100%;
   border-top: 1px dashed black;
   margin-top: 3px;
@@ -559,7 +584,7 @@ body.nuit {
 }
 
 #logos_footer {
-  margin-top: 40px;
+  margin-block: 40px;
   display: flex;
   gap: 30px;
 }
@@ -568,10 +593,6 @@ body.nuit {
   font-size: 14px;
   font-weight: bold;
   color: var(--fond_mode_jour);
-}
-
-#mentions-legales {
-  margin-top: 40px;
 }
 
 #politiques_de_confidentialite {
@@ -598,18 +619,26 @@ body.nuit {
 .input_form {
   width: 100%;
   margin-block: 10px 40px;
-  /* Soit */
-  /* border-collapse: collapse;
-  border: 1px solid black;
-  border-radius: 5px;
-  height: 25px;
-  background: var(--jaune_footer); */
-  /* Soit */
   border-collapse: collapse;
   border: 0;
   border-bottom: 1px solid black;
+  height: 25px;
+  background: none;
+  font-size: 16px;
+  padding-left: 5px;
 }
 /* ===== Fin page contact ===== */
+
+/* Début mentions légales */
+#container_mentions_legales {
+  padding-inline: var(--padding_bord_tablette_desktop);
+  margin-bottom: 60px;
+}
+
+#container_mentions_legales h2{
+  margin-top: 32px;
+}
+/* Fin mentions légales */
 
 /* Pour tablette */
 @media (min-width: 744px) {
@@ -635,7 +664,7 @@ body.nuit {
       font-weight: bold;
       color: var(--blanc);
       letter-spacing: 0.75px;
-      grid-column: span 4;
+      grid-column: span 6;
       margin: auto;
       margin-block: 60px;
       padding-inline: 25px;
@@ -652,13 +681,13 @@ body.nuit {
       font-weight: bold;
       color: var(--blanc);
       letter-spacing: 0.75px;
-      grid-column: span 4;
+      grid-column: span 6;
       margin: auto;
       margin-block: 60px;
       padding-inline: 25px;
     }
 
-    #container_header_tablette_desktop {
+    .container_header_tablette_desktop {
       display: flex; 
       align-items: center; 
       justify-content: space-between; 
@@ -667,11 +696,11 @@ body.nuit {
       margin-block: 40px;
     }
 
-    #container_header_mobile {
+    .container_header_mobile {
       display: none;
     }
 
-    #container_header {
+    .container_header {
       display: flex;
       gap: 56px;
       align-items: center;
@@ -710,7 +739,7 @@ body.nuit {
     #container_introduction {
       margin-top: -103px;
       padding-inline: var(--padding_bord_tablette_desktop);
-      width: 560px;
+      width: 100vw;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
     }
@@ -837,7 +866,7 @@ body.nuit {
       font-weight: bold;
       color: var(--blanc);
       letter-spacing: 0.75px;
-      grid-column: span 4;
+      grid-column: span 6;
       margin: auto;
       margin-block: 60px;
       padding-inline: 30px;
@@ -856,7 +885,7 @@ body.nuit {
       font-weight: bold;
       color: var(--blanc);
       letter-spacing: 0.75px;
-      grid-column: span 4;
+      grid-column: span 6;
       margin: auto;
       margin-block: 60px;
       padding-inline: 30px;
@@ -865,7 +894,7 @@ body.nuit {
     }
 
   
-    #container_header_tablette_desktop {
+    .container_header_tablette_desktop {
       display: flex; 
       align-items: center; 
       justify-content: space-between; 
@@ -873,11 +902,11 @@ body.nuit {
       padding-inline: var(--padding_bord_tablette_desktop);
     }
   
-    #container_header_mobile {
+    .container_header_mobile {
       display: none;
     }
   
-    #container_header {
+    .container_header {
       display: flex;
       gap: 56px;
       align-items: center;
@@ -923,9 +952,17 @@ body.nuit {
     #bouton_intro_me_contacter {
       margin-left: 0;
     }
+
+    /* Début projets */
+    #projets_grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      column-gap: 16px;
+      margin-top: 40px;
+    }
   
     #projets_dev {
-      grid-column: span 2;
+      grid-column: 2 / span 2;
       height: 100px;
       border-radius: 5px;
       font-size: 48px;
@@ -941,9 +978,15 @@ body.nuit {
       color: var(--blanc);
       border: 2px solid var(--blanc);
     }
+
+    #texte_projets_dev {
+      grid-column: 2 / span 4;
+      color: var(--blanc);
+      margin-top: 40px;
+    }
   
     .vignette_projet {
-      grid-column: span 2;
+      grid-column: span 3;
     }
   
     .container_image_projet {
@@ -985,13 +1028,14 @@ body.nuit {
       font-weight: bold;
       color: var(--blanc);
       letter-spacing: 0.75px;
-      grid-column: span 4;
+      grid-column: span 6;
       margin: auto;
       margin-block: 60px;
       padding-inline: 30px;
       display: flex;
       align-items: center;
     }
+    /* Fin projets */
   
     #container_qui_suis_je, #container_qui_suis_je_pro_perso {
       margin-top: 60px;
@@ -1021,7 +1065,7 @@ body.nuit {
       height: 85px;
     }
 
-    .container_ligne_pointillee_et_logos {
+    .container_ligne_pointille_et_logos {
       display: flex;
       flex-wrap: wrap;
       gap: 20px;      
@@ -1079,6 +1123,10 @@ body.nuit {
       border-collapse: collapse;
       border: 0;
       border-bottom: 1px solid black;
+      height: 25px;
+      background: none;
+      font-size: 20px;
+      padding-left: 5px;
     }
     
     #titre_contact {
@@ -1089,5 +1137,82 @@ body.nuit {
     label {
       font-size: 24px;
     }
+
+    #message_formulaire {
+      grid-column: 2 / span 4;
+      margin-bottom: 25px;
+    }
     /* Fin page contact */
+
+    /* Début tableau de bord backoffice */
+    #body_tableau_de_bord {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f5f5f5;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      row-gap: 15px;
+    }
+
+    #titre_tableau_de_bord {
+        text-align: center;
+        color: #444;
+    }
+
+    #ul_tableau_de_bord {
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .li_tableau_de_bord {
+        display: inline-block;
+    }
+
+    .liens_tableau_de_bord {
+        text-decoration: none;
+        color: #fff;
+        background-color: #007bff;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-weight: bold;
+        transition: background-color 0.3s;
+    }
+
+    .liens_tableau_de_bord:hover {
+        background-color: #0056b3;
+    }
+
+    .liens_nouveau_projet {
+        text-decoration: none;
+        color: #fff;
+        background-color: #00eb2b;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-weight: bold;
+        transition: background-color 0.3s;
+    }
+
+    .liens_nouveau_projet:hover {
+        background-color: #00b330;
+    }
+
+    #texte_tableau_de_bord {
+        text-align: center;
+        font-size: 18px;
+        margin-block: 20px;
+    }
+
+    .dashboard-container {
+        text-align: center;
+    }
+
+    .td_backoffice, .th_backoffice {
+      padding: 5px;
+    }
+    /* Fin tableau de bord backoffice */
   }

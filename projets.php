@@ -1,44 +1,9 @@
-<?php include "./inc/head.inc.php"; ?>
+<?php include "./config/inc/head.inc.php"; ?>
 <title>Portfolio - Erwan CÉNAC</title>
 
 </head>
 <body>
-    <div id="container">
-        <header>
-            <div id="container_header_tablette_desktop">
-                <img src="assets/images/logo_noir_sans_baseline.webp" alt="logo de Erwan CÉNAC" class="logo_nav_mode_jour" loading="lazy">
-                <div id="container_header">
-                    <?php include "inc/nav.inc.php"; ?>
-                    <img src="assets/images/france.webp" alt="" class="mode_langue" loading="lazy">
-                    <div class="toggle-switch">
-                        <label class="switch-label">
-                            <input type="checkbox" class="checkbox">
-                            <span class="slider"></span>
-                        </label>
-                    </div>  
-                </div>
-            </div>
-
-            <div id="container_header_mobile">
-                <img src="assets/images/logo_noir_sans_baseline.webp" alt="logo de Erwan CÉNAC" class="logo_nav_mode_jour" loading="lazy">
-                <img src="assets/images/france.webp" alt="" class="mode_langue" loading="lazy">
-
-                <div class="toggle-switch">
-                    <label class="switch-label">
-                        <input type="checkbox" class="checkbox">
-                        <span class="slider"></span>
-                    </label>
-                </div> 
-
-                <label class="burger" for="burger">
-                    <input type="checkbox" id="burger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </label>
-            </div>
-        </header>
-    </div>
+    <?php include "./config/inc/header.inc.php"; ?>
 
     <div id="container_projets">
         <h2 id="mes_réalisations" class="titre_principal">Mes réalisations</h2>
@@ -118,4 +83,4 @@
         </div>
     </div>
 
-    <?php include "inc/footer.inc.php"; ?>
+    <?php include "config/inc/footer.inc.php"; ?>

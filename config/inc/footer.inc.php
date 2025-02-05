@@ -23,11 +23,10 @@
                         <img  class="logos_langages" src="assets/images/linkedin.webp" alt="Logo du réseau social professionnel LinkedIn." height="55px" loading="lazy">
                     </a>
                 </div>
-                <p id="mentions-legales" class="ml_pdc">Mentions légales</p>
-                <p id="politiques_de_confidentialite" class="ml_pdc">Politiques de confidentialité</p>
+                <a href="mentions_legales.php" class="ml_pdc">Mentions légales</a>
+                <!-- <a id="politiques_de_confidentialite" class="ml_pdc">Politiques de confidentialité</a> -->
             </div>
         <!-- </div> -->
-        © ML. - Plan du site
     </footer>
     </div>
     <script src="assets/js/app.js"></script>
