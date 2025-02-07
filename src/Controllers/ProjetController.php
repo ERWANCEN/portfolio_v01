@@ -3,8 +3,13 @@
 namespace Controllers;
 
 use Models\Projet;
+use Models\ImagesContexte;
+use Models\EtapeProjet;
+use Models\OutilsUtilises;
+use Models\AvisProjet;
 use Config\Database;
 use Exception;
+use Models\Template;
 
 class ProjetController
 {
@@ -49,23 +54,31 @@ class ProjetController
     public function createProjet($data)
     {
         try {
-            $titre = trim($data['titre']);
-            $description = trim($data['description']);
-
-            if (empty($titre) || empty($description)) {
-                header('Location: /portfolio_v01/admin/projets/list.php?error=validation');
-                exit;
+            // Validation des données
+            if (empty($data['titre']) || empty($data['texte_contexte']) || empty($data['image_principale'])) {
+                die('Erreur : Tous les champs sont obligatoires.');
             }
-
-            $projet = new Projet(null, $titre, $description);
-            $projet->create($this->db);
+    
+            // Création du modèle
+            $template = new Template(
+                null,
+                $data['titre'],
+                $data['image_principale'],
+                $data['texte_contexte'],
+                $data['description']
+            );
+    
+            // Sauvegarde en base de données
+            $template->create($this->db);
+    
+            // Redirection en cas de succès
             header('Location: /portfolio_v01/admin/projets/list.php?success=created');
             exit;
         } catch (Exception $e) {
-            header('Location: /portfolio_v01/admin/projets/list.php?error=exception');
-            exit;
+            echo 'Erreur : ' . $e->getMessage();
         }
     }
+    
 
     public function updateProjet($id, $data)
     {
@@ -124,5 +137,25 @@ class ProjetController
             header('Location: /portfolio_v01/admin/projets/list.php?error=exception');
             exit;
         }
+    }
+
+    public function showFullProject($id)
+    {
+        $db = Database::getConnection();
+
+        // Récupérer les données liées au projet
+        $projet = Projet::findById($db, $id);
+        $imagesContexte = ImagesContexte::findByProjectId($db, $id);
+        $etapes = EtapeProjet::findByProjectId($db, $id);
+        $outils = OutilsUtilises::findByProjectId($db, $id);
+        $avis = AvisProjet::findByProjectId($db, $id);
+
+        // Si le projet n'existe pas
+        if (!$projet) {
+            die('Erreur : Le projet demandé est introuvable.');
+        }
+
+        // Inclure la vue pour afficher le projet
+        include __DIR__ . '/../../views/template.php';
     }
 }

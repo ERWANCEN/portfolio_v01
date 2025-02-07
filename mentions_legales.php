@@ -1,11 +1,12 @@
 <?php include "./config/inc/head.inc.php"; ?>
+<?php include BASE_PATH . '/config/inc/head.inc.php'; ?>
 <title>Mentions légales - Erwan CÉNAC</title>
 
 </head>
 <body>
     <div id="container_general">
 
-        <?php include "./config/inc/header.inc.php"; ?>
+        <?php include BASE_PATH . '/config/inc/header.inc.php'; ?>
 
         <h1 class="titre_principal texte_dark_mode">Mentions légales</h1>
     <div id="container_mentions_legales">
@@ -29,4 +30,4 @@
         <p class="texte_dark_mode">Le site est soumis au droit français. En cas de litige, les tribunaux de Paris seront compétents.</p>
     </div>
 
-        <?php include "./config/inc/footer.inc.php"; ?>
+    <?php include BASE_PATH . '/config/inc/footer.inc.php'; ?>

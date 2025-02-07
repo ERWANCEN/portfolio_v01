@@ -33,6 +33,23 @@ $action = isset($projet) ? '/portfolio_v01/admin/projets/update.php?id=' . htmls
         <button type="submit">Enregistrer</button>
     </form>
 
+    <h1>Création d'un projet</h1>
+
+    <form method="POST" action="/portfolio_v01/admin/projets/create.php" enctype="multipart/form-data">
+        <label for="titre">Titre du projet :</label>
+        <input type="text" id="titre" name="titre" required>
+
+        <label for="image_principale">Image principale :</label>
+        <input type="file" id="image_principale" name="image_principale" accept="image/*" required>
+
+        <label for="description">Description :</label>
+        <textarea id="description" name="description" required></textarea>
+
+        <label for="texte_contexte">Texte de contexte :</label>
+        <textarea id="texte_contexte" name="texte_contexte" required></textarea>
+
+        <button type="submit">Créer le projet</button>
+    </form>
 
     <a href="/portfolio_v01/admin/projets/list.php">Annuler</a>
 </body>

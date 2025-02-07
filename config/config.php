@@ -17,3 +17,6 @@ define('ASSETS_PATH', 'assets/');
 // Gestion de la déconnexion
 
 define('BASE_URL', '/portfolio_v01');
+
+// Définit le chemin de base du projet
+define('BASE_PATH', dirname(__DIR__));

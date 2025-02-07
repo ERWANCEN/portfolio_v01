@@ -1,0 +1,11 @@
+RewriteEngine On
+
+# Si le fichier ou le dossier n'existe pas physiquement
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Réécriture pour les projets
+RewriteRule ^template/project/([0-9]+)/?$ template.php?id=$1 [L,QSA]
+
+# Redirection de la page 404
+ErrorDocument 404 /portfolio_v01/404.php

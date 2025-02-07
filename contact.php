@@ -1,5 +1,8 @@
 <?php
-include "./config/inc/head.inc.php";
+// Inclure le fichier de configuration
+require_once __DIR__ . '/config/config.php';
+
+include BASE_PATH . '/config/inc/head.inc.php';
 
 // Inclure l'autoload pour charger les classes automatiquement
 require_once __DIR__ . '/autoload.php';
@@ -7,12 +10,12 @@ use Config\Database;
 use Models\Contact;
 
 // Démarrer la session pour le token CSRF
-session_start();
+// session_start();
 
 // Génération d'un token CSRF s'il n'existe pas
-if (empty($_SESSION['csrf_token'])) {
-    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-}
+// if (empty($_SESSION['csrf_token'])) {
+//     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+// }
 
 // Initialisation des variables
 $successMessage = '';
@@ -26,9 +29,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Vérification du token CSRF
-        if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-            throw new Exception('Requête non valide. Token CSRF invalide.');
-        }
+        // if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        //     throw new Exception('Requête non valide. Token CSRF invalide.');
+        // }
 
         // Récupération des données avec nettoyage
         $nom = trim($_POST['nom'] ?? '');
@@ -67,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 <div id="container">
-    <?php include "./config/inc/header.inc.php"; ?>
+    <?php include BASE_PATH . '/config/inc/header.inc.php'; ?>
 
     <!-- Formulaire de contact -->
     <form id="formulaire_de_contact" method="post" action="contact.php">
@@ -87,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="text" name="honeypot" id="honeypot">
         </div>
 
-        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token']) ?>">
+
 
         <div id="champ_nom">
             <label for="nom" class="texte_dark_mode">Comment vous appelez-vous ?</label>
@@ -108,4 +111,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
 </div>
 
-<?php include "config/inc/footer.inc.php"; ?>
+<?php include BASE_PATH . '/config/inc/footer.inc.php'; ?>

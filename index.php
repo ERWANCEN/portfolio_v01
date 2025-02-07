@@ -1,11 +1,29 @@
-<?php include "./config/inc/head.inc.php"; ?>
+<?php 
+require_once __DIR__ . '/config/config.php';
+require_once __DIR__ . '/config/functions.php';
+require_once __DIR__ . '/autoload.php';
+
+use Models\Template;
+use Config\Database;
+
+// Récupération des projets
+try {
+    $db = Database::getConnection();
+    $stmt = $db->query('SELECT * FROM projet_template ORDER BY id_projet DESC');
+    $projets = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (Exception $e) {
+    $projets = [];
+}
+?>
+
+<?php include __DIR__ . '/config/inc/head.inc.php'; ?>
 <title>Portfolio - Erwan CÉNAC</title>
 
 </head>
 <body>
     <div id="container_general">
 
-        <?php include "./config/inc/header.inc.php"; ?>
+        <?php include __DIR__ . '/config/inc/header.inc.php'; ?>
 
         <div id="container_bandeau_deroulant">
             <div class="bande_jaune" id="bande_jaune_haut"></div>
@@ -19,46 +37,27 @@
             <a id="bouton_intro_me_contacter" class="cta" href="./contact.php">Me contacter</a>
         </div>
 
-
-
         <div id="container_projets">
             <h2 id="mes_réalisations" class="titre_principal">Mes réalisations</h2>
             <div id="projets_grid">
                 <button id="projets_dev">dev</button>
                 <button id="projets_design">design</button>
                 <p class="texte" id="texte_projets_dev">Découvrez mes projets en développement web, mettant en avant la performance, l'écologie et une UX optimisée.</p>
-                <div class="vignette_projet">
+                
+                <?php foreach ($projets as $projet): ?>
+                <a href="<?php echo getProjectUrl($projet['id_projet']); ?>" class="vignette_projet">
                     <div class="container_image_projet">
-                        <img class="image_projet" src="assets/images/projets/antelope_canyon_01.jpeg" alt="">
+                        <img class="image_projet" src="assets/images/projets/<?php echo htmlspecialchars($projet['image_principale']); ?>" alt="<?php echo htmlspecialchars($projet['titre']); ?>">
                     </div>
                     <div class="bas_vignette">
-                        <h3 class="nom_du_projet">Projet 01</h3>
+                        <h3 class="nom_du_projet"><?php echo htmlspecialchars($projet['titre']); ?></h3>
                         <img class="fleche_droite" src="assets/images/fleche_droite.svg" alt="">
                     </div>
-                </div>
-                <div class="vignette_projet">
-                    <div class="container_image_projet">
-                        <img class="image_projet" src="assets/images/projets/montgolfieres_01.jpeg" alt="">
-                    </div>
-                    <div class="bas_vignette">
-                        <h3 class="nom_du_projet">Projet 02</h3>
-                        <img class="fleche_droite" src="assets/images/fleche_droite.svg" alt="">
-                    </div>
-                </div>
-                <div class="vignette_projet">
-                    <div class="container_image_projet">
-                        <img class="image_projet" src="assets/images/projets/mont_fuji_01.jpeg" alt="">
-                    </div>
-                    <div class="bas_vignette">
-                        <h3 class="nom_du_projet">Projet 03</h3>
-                        <img class="fleche_droite" src="assets/images/fleche_droite.svg" alt="">
-                    </div>
-                </div>
+                </a>
+                <?php endforeach; ?>
                 <a class="cta" href="projets.php">Voir tous les projets</a>
             </div>
         </div>
-
-
 
         <section id="container_qui_suis_je">
             <h2 id="qui_suis_je" class="titre_principal texte_dark_mode">Qui suis-je ?</h2>
@@ -69,7 +68,6 @@
             </div>
         </section>
 
-        
         <section id="container_qui_suis_je_pro_perso">
             <h2 id="au_travail" class="titre_principal">Au travail</h2>
             <p id="texte_au_travail" class="texte">Dans ma vie professionnelle, je suis quelqu’un de rigoureux et méthodique. J’aime relever des défis techniques et collaborer sur des projets concrets. Mon parcours en design graphique enrichit ma vision en développement web, me permettant de concevoir des interfaces à la fois fonctionnelles et attrayantes. Toujours en quête d’apprentissage, je m’intéresse aussi aux technologies émergentes comme l’intelligence artificielle pour comprendre comment elles peuvent transformer notre métier.</p>
@@ -130,4 +128,8 @@
 
         </div>
 
-        <?php include "./config/inc/footer.inc.php"; ?>
+        <a href="index.php">
+            <img src="/portfolio_v01/assets/images/fleche_droite.svg" alt="Remonter" class="retour_top">
+        </a>
+
+        <?php include __DIR__ . '/config/inc/footer.inc.php'; ?>
