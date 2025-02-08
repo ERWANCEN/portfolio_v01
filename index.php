@@ -40,14 +40,14 @@ try {
         <div id="container_projets">
             <h2 id="mes_réalisations" class="titre_principal">Mes réalisations</h2>
             <div id="projets_grid">
-                <button id="projets_dev">dev</button>
-                <button id="projets_design">design</button>
+                <!-- <button id="projets_dev">dev</button>
+                <button id="projets_design">design</button> -->
                 <p class="texte" id="texte_projets_dev">Découvrez mes projets en développement web, mettant en avant la performance, l'écologie et une UX optimisée.</p>
                 
                 <?php foreach ($projets as $projet): ?>
                 <a href="<?php echo getProjectUrl($projet['id_projet']); ?>" class="vignette_projet">
                     <div class="container_image_projet">
-                        <img class="image_projet" src="assets/images/projets/<?php echo htmlspecialchars($projet['image_principale']); ?>" alt="<?php echo htmlspecialchars($projet['titre']); ?>">
+                        <img class="image_projet" src="assets/images/<?php echo htmlspecialchars($projet['image_principale']); ?>" alt="<?php echo htmlspecialchars($projet['titre']); ?>">
                     </div>
                     <div class="bas_vignette">
                         <h3 class="nom_du_projet"><?php echo htmlspecialchars($projet['titre']); ?></h3>
@@ -63,9 +63,9 @@ try {
             <h2 id="qui_suis_je" class="titre_principal texte_dark_mode">Qui suis-je ?</h2>
             <h3 id="intro_qui_suis_je" class="sous_titre texte_dark_mode">Étudiant en Développement Web & Curieux des Nouvelles Technologies</h3>
             <p id="texte_qui_suis_je" class="texte texte_dark_mode">Actuellement en première année de spécialité Développement Web, je suis passionné par la création de sites et d’outils numériques. Avec un intérêt grandissant pour l’intelligence artificielle, je découvre comment ces technologies peuvent enrichir le développement web et simplifier certains processus. Bien que je ne les incorpore pas encore directement dans mes projets, je m’y adapte pour être prêt à répondre aux évolutions de la profession. Polyvalent et motivé, je recherche un stage ou une alternance pour continuer à apprendre et contribuer à des projets innovants.</p>
-            <div id="photo_erwan">
+            <!-- <div id="photo_erwan">
                 <img id="image_erwan"src="assets/images/photo_erwan.webp" alt="Erwan souriant face à la caméra" loading="lazy">
-            </div>
+            </div> -->
         </section>
 
         <section id="container_qui_suis_je_pro_perso">
@@ -128,8 +128,6 @@ try {
 
         </div>
 
-        <a href="index.php">
-            <img src="/portfolio_v01/assets/images/fleche_droite.svg" alt="Remonter" class="retour_top">
-        </a>
+
 
         <?php include __DIR__ . '/config/inc/footer.inc.php'; ?>

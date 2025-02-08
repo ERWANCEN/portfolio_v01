@@ -27,8 +27,8 @@ include __DIR__ . '/config/inc/head.inc.php';
         <div id="container_projets">
             <h2 id="mes_réalisations" class="titre_principal">Mes réalisations</h2>
             <div id="projets_grid">
-                <button id="projets_dev">dev</button>
-                <button id="projets_design">design</button>
+                <!-- <button id="projets_dev">dev</button>
+                <button id="projets_design">design</button> -->
                 <p class="texte" id="texte_projets_dev">Découvrez mes projets en développement web, où la structure, la performance et l'interactivité sont au cœur de mes réalisations.</p>
 
                 <?php foreach ($projets as $projet): ?>
@@ -38,7 +38,7 @@ include __DIR__ . '/config/inc/head.inc.php';
                     </div>
                     <div class="bas_vignette">
                         <h3 class="nom_du_projet"><?php echo htmlspecialchars($projet['titre']); ?></h3>
-                        <img class="fleche_droite" src="/portfolio_v01/assets/images/fleche_droite.svg" alt="">
+                        <img class="fleche_droite" src="/portfolio_v01/assets/images/fleche_droite.svg" alt="">                    
                     </div>
                 </a>
                 <?php endforeach; ?>
@@ -50,6 +50,6 @@ include __DIR__ . '/config/inc/head.inc.php';
 
         <?php include __DIR__ . '/config/inc/footer.inc.php'; ?>
     </div>
-    <script src="/portfolio_v01/assets/js/app.js"></script>
+    <script src="/portfolio_v01/assets/js/script.js"></script>
 </body>
 </html>

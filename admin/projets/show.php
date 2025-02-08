@@ -1,18 +1,26 @@
 <?php
 
-use Config\Database;
-use Controllers\ProjetController;
-
 require_once '../../autoload.php';
+require_once '../../config/auth.php';
 
-// Connexion via la classe Database
-$db = Database::getConnection();
+requireLogin();
+
+use Controllers\ProjetController;
 
 $id = $_GET['id'] ?? null;
 
 if ($id) {
     $controller = new ProjetController();
-    $controller->showProjet($id);
+    $projet = $controller->getProjet($id);
+    
+    if ($projet) {
+        // Récupérer les informations supplémentaires
+        $controller->showProjet($id);
+    } else {
+        header('Location: /portfolio_v01/admin/projets/');
+        exit();
+    }
 } else {
-    echo 'ID du projet manquant.';
+    header('Location: /portfolio_v01/admin/projets/');
+    exit();
 }

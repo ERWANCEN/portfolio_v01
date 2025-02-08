@@ -1,7 +1,10 @@
 <?php
-
-// Chargement automatique des classes
+// Chargement automatique des classes et authentification
 require_once '../../autoload.php';
+require_once '../../config/auth.php';
+
+// Vérifier si l'utilisateur est connecté
+requireLogin();
 
 use Controllers\ProjetController;
 

@@ -1,3 +1,7 @@
+    <a href="#" class="retour_top">
+        <img src="/portfolio_v01/assets/images/fleche_droite_rose.svg" alt="Remonter">
+    </a>
+
 <footer>
     <div id="container_footer_jaune">
         <!-- <div id="textes_et_cta_footer_jaune"> -->
@@ -28,6 +32,6 @@
     <!-- </div> -->
 </footer>
 </div>
-<script src="assets/js/app.js"></script>
+<script src="assets/js/script.js"></script>
 </body>
 </html>

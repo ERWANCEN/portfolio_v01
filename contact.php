@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php include BASE_PATH . '/config/inc/header.inc.php'; ?>
 
     <!-- Formulaire de contact -->
-    <form id="formulaire_de_contact" method="post" action="contact.php">
+    <form class="formulaire_de_contact" method="post" action="contact.php">
         <h1 id="titre_contact" class="titre_principal texte_dark_mode">Contact</h1>
         <div id="message_formulaire">
             <!-- Affichage des messages de succès ou d'erreur -->
@@ -92,17 +92,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 
-        <div id="champ_nom">
+        <div class="champ_nom">
             <label for="nom" class="texte_dark_mode">Comment vous appelez-vous ?</label>
             <input class="input_form texte_dark_mode" type="text" name="nom" id="nom" value="<?= htmlspecialchars($_POST['nom'] ?? '') ?>" required maxlength="100">
         </div>
 
-        <div id="champ_email">
+        <div class="champ_email">
             <label for="email" class="texte_dark_mode">Quel est votre email ?</label>
             <input class="input_form texte_dark_mode" type="email" name="email" id="email" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" required maxlength="150">
         </div>
 
-        <div id="champ_message">
+        <div class="champ_message">
             <label for="message" class="texte_dark_mode">Quel est votre message ?</label>
             <textarea class="input_form texte_dark_mode" name="message" id="message" required maxlength="1000"><?= htmlspecialchars($_POST['message'] ?? '') ?></textarea>
         </div>

@@ -4,8 +4,26 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
+# Masquer les extensions de fichiers en local
+RewriteBase /
+
+# URLs propres pour les pages principales
+RewriteRule ^projets/?$ portfolio_v01/projets.php [L,QSA]
+RewriteRule ^contact/?$ portfolio_v01/contact.php [L,QSA]
+RewriteRule ^mentions-legales/?$ portfolio_v01/mentions_legales.php [L,QSA]
+
 # Réécriture pour les projets
-RewriteRule ^template/project/([0-9]+)/?$ template.php?id=$1 [L,QSA]
+RewriteRule ^projet/([0-9]+)/?$ portfolio_v01/template.php?id=$1 [L,QSA]
+
+# Redirection vers le backoffice
+RewriteRule ^back_access_mcce/?$ portfolio_v01/backoffice/login.php [L,QSA]
+
+# En production, décommentez les lignes suivantes et commentez celles du dessus
+# RewriteRule ^projets/?$ projets.php [L,QSA]
+# RewriteRule ^contact/?$ contact.php [L,QSA]
+# RewriteRule ^mentions-legales/?$ mentions_legales.php [L,QSA]
+# RewriteRule ^projet/([0-9]+)/?$ template.php?id=$1 [L,QSA]
+# RewriteRule ^back_access_mcce/?$ backoffice/login.php [L,QSA]
 
 # Redirection de la page 404
 ErrorDocument 404 /portfolio_v01/404.php

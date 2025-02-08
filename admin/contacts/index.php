@@ -1,6 +1,10 @@
 <?php
-// Charger l'autoloader pour les classes
+// Charger l'autoloader et l'authentification
 require_once __DIR__ . '/../../autoload.php';
+require_once __DIR__ . '/../../config/auth.php';
+
+// Vérifier si l'utilisateur est connecté
+requireLogin();
 
 
 // Utiliser le contrôleur ContactController
