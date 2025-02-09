@@ -15,3 +15,7 @@ $db = new PDO('mysql:host=localhost;dbname=portfolio_crud', 'root', 'root');
 $controller = new ProjetController($db);
 $controller->listProjets();
 ?>
+
+<a class="liens_tableau_de_bord" href="/portfolio_v01/admin/">Retour au tableau de bord</a>
+
+<?php include __DIR__ . '/../../config/inc/admin_footer.inc.php'; ?>

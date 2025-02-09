@@ -47,7 +47,7 @@ try {
                 <?php foreach ($projets as $projet): ?>
                 <a href="<?php echo getProjectUrl($projet['id_projet']); ?>" class="vignette_projet">
                     <div class="container_image_projet">
-                        <img class="image_projet" src="assets/images/<?php echo htmlspecialchars($projet['image_principale']); ?>" alt="<?php echo htmlspecialchars($projet['titre']); ?>">
+                        <img class="image_projet" src="/portfolio_v01/assets/images/projets/<?php echo htmlspecialchars($projet['image_principale']); ?>" alt="<?php echo htmlspecialchars($projet['titre']); ?>">
                     </div>
                     <div class="bas_vignette">
                         <h3 class="nom_du_projet"><?php echo htmlspecialchars($projet['titre']); ?></h3>
@@ -104,14 +104,17 @@ try {
             <h3 id="plateformes_web_collaboratives" class="sous_titre sous_titre_competences texte_dark_mode">Plateformes web collaboratives</h3>
             <div class="container_ligne_pointille_et_logos">
                 <div class="ligne_pointille"></div>
-                <img id="logo_github" class="logos_langages" src="assets/images/github.webp" alt="Logo GitHub" height="65px" loading="lazy" title="GitHub">
+                <a id="logo_github"href="https://github.com/ERWANCEN" target="_blank">
+                    <img class="logos_langages github_logo_jour" src="assets/images/github.webp" alt="Logo GitHub" height="65px" loading="lazy" title="GitHub">
+                    <img class="logos_langages github_logo_nuit" src="assets/images/github_blanc.webp" alt="Logo GitHub" height="65px" loading="lazy" title="GitHub">
+                </a>
 
             </div>
 
             <h3 id="wordpress" class="sous_titre sous_titre_competences texte_dark_mode">WordPress</h3>
             <div class="container_ligne_pointille_et_logos">
                 <div class="ligne_pointille"></div>
-                <img id="wordpress_logo" class="logos_langages" src="assets/images/wordpress.webp" alt="Logo du CMS (content management system) WordPress." height="65px" loading="lazy" title="WordPress">
+                <a href="https://wordpress.org/" target="_blank"><img id="wordpress_logo" class="logos_langages" src="assets/images/wordpress.webp" alt="Logo du CMS (content management system) WordPress." height="65px" loading="lazy" title="WordPress"></a>
             </div>
 
             <h3 id="outils_creatifs" class="sous_titre sous_titre_competences texte_dark_mode">Outils créatifs</h3>

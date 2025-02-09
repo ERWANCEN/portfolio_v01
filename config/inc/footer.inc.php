@@ -20,10 +20,10 @@
             <p id="erwan_footer">Erwan CÉNAC</p>
             <div id="logos_footer">
                 <a href="https://github.com/ERWANCEN?tab=repositories" target="_blank" rel="nofollow">
-                    <img  class="logos_langages" src="/portfolio_v01/assets/images/github_blanc.webp" alt="Logo du service web d'hébergement et de gestion de développement de logiciels Github." height="55px" loading="lazy">
+                    <img class="logos_langages" src="/portfolio_v01/assets/images/github_blanc.webp" alt="Logo du service web d'hébergement et de gestion de développement de logiciels Github." height="55px" loading="lazy">
                 </a>
                 <a href="https://www.linkedin.com/in/erwancenac/" target="_blank" rel="nofollow">
-                    <img  class="logos_langages" src="/portfolio_v01/assets/images/linkedin.webp" alt="Logo du réseau social professionnel LinkedIn." height="55px" loading="lazy">
+                    <img class="logos_langages" src="/portfolio_v01/assets/images/linkedin.webp" alt="Logo du réseau social professionnel LinkedIn." height="55px" loading="lazy">
                 </a>
             </div>
             <a href="mentions_legales.php" class="ml_pdc">Mentions légales</a>
@@ -32,6 +32,6 @@
     <!-- </div> -->
 </footer>
 </div>
-<script src="assets/js/script.js"></script>
+<script src="/portfolio_v01/assets/js/script.js"></script>
 </body>
 </html>
