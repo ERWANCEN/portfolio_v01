@@ -26,5 +26,6 @@
     </div>
     
     <?php include __DIR__ . '/../../config/inc/admin_footer.inc.php'; ?>
+    <script src="/portfolio_v01/assets/js/script.js"></script>
 </body>
 </html>

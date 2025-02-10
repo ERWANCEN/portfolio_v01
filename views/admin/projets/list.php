@@ -1,5 +1,6 @@
 <?php include __DIR__ . '/../../../config/inc/head.inc.php'; ?>
     <title>Liste des projets</title>
+    <link rel="stylesheet" href="/portfolio_v01/assets/css/admin-buttons.css">
 </head>
 <body id="body_tableau_de_bord">
 <header style="z-index:1003; position:relative;">
@@ -44,9 +45,11 @@
                             <td class="td_backoffice"><?= htmlspecialchars($projet['texte_contexte']) ?></td>
                             <td class="td_backoffice"><?= $projet['image_principale'] ? 'Oui' : 'Non' ?></td>
                             <td class="td_backoffice">
-                                <a href="/portfolio_v01/admin/projets/show.php?id=<?= htmlspecialchars($projet['id_projet']) ?>" class="btn-action btn-blue">Voir</a>
-                                <a href="/portfolio_v01/admin/projets/edit.php?id=<?= htmlspecialchars($projet['id_projet']) ?>" class="btn-action btn-orange">Modifier</a>
-                                <a href="/portfolio_v01/admin/projets/delete.php?id=<?= htmlspecialchars($projet['id_projet']) ?>" class="btn-action btn-red" onclick="return confirm('Confirmer la suppression ?')">Supprimer</a>
+                                <div class="btn-action-container">
+                                    <a href="/portfolio_v01/admin/projets/show.php?id=<?= htmlspecialchars($projet['id_projet']) ?>" class="btn-action btn-blue">Voir</a>
+                                    <a href="/portfolio_v01/admin/projets/edit.php?id=<?= htmlspecialchars($projet['id_projet']) ?>" class="btn-action btn-orange">Modifier</a>
+                                    <a href="/portfolio_v01/admin/projets/delete.php?id=<?= htmlspecialchars($projet['id_projet']) ?>" class="btn-action btn-red" onclick="return confirm('Confirmer la suppression ?')">Supprimer</a>
+                                </div>
                             </td>
                         </tr>
                     <?php endforeach; ?>

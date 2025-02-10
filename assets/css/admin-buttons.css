@@ -1,0 +1,49 @@
+/* Styles pour les boutons d'action dans l'admin */
+.btn-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    margin: 0 4px;
+    min-width: 100px;
+    transition: all 0.2s ease;
+}
+
+.btn-action:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-blue {
+    background-color: var(--primary-color, #007bff);
+    color: white;
+}
+
+.btn-orange {
+    background-color: #f39c12;
+    color: white;
+}
+
+.btn-red {
+    background-color: #e74c3c;
+    color: white;
+}
+
+/* Support du mode sombre */
+.dark .btn-action {
+    opacity: 0.9;
+}
+
+.dark .btn-action:hover {
+    opacity: 1;
+}
+
+/* Container pour aligner les boutons */
+.td_backoffice .btn-action-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
