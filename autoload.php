@@ -1,21 +1,17 @@
 <?php
-
 spl_autoload_register(function ($class) {
-    // Chercher d'abord dans src/
-    $srcPath = __DIR__ . '/src/' . str_replace('\\', '/', $class) . '.php';
+    // Convertir les namespace en chemin de fichier
+    $class = str_replace('\\', DIRECTORY_SEPARATOR, $class);
     
-    if (file_exists($srcPath)) {
-        require_once $srcPath;
+    // Le chemin du fichier dans src/
+    $path = __DIR__ . '/src/' . $class . '.php';
+    
+    // Vérifier si le fichier existe
+    if (file_exists($path)) {
+        require_once $path;
         return;
     }
     
-    // Si non trouvé, chercher à la racine (pour la compatibilité)
-    $rootPath = __DIR__ . '/' . str_replace('\\', '/', $class) . '.php';
-    
-    if (file_exists($rootPath)) {
-        require_once $rootPath;
-        return;
-    }
-    
-    throw new Exception("La classe $class n'a pas pu être chargée : fichiers $srcPath et $rootPath introuvables.");
+    // Si on arrive ici, la classe n'a pas été trouvée
+    throw new Exception("La classe {$class} n'a pas pu être chargée : fichier {$path} introuvable.");
 });

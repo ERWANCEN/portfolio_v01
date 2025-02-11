@@ -1,57 +1,64 @@
 <?php 
-// Inclure les fichiers nécessaires
-require_once __DIR__ . '/config/config.php';
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+require_once __DIR__ . '/config/paths.php';
 require_once __DIR__ . '/config/functions.php';
 require_once __DIR__ . '/autoload.php';
 
-use Config\Database;
+use Config\DataBase;
 
-// Vérifier si l'ID est présent
+session_start();
+
+// Vérifier si l'ID est présent dans l'URL
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
-    header('Location: /portfolio_v01/projets.php');
+    header('Location: projets.php');
     exit;
 }
 
 $id_projet = (int)$_GET['id'];
 
 try {
-    $db = Database::getConnection();
+    $pdo = DataBase::getConnection();
     
-    // Récupérer les informations du projet
-    $stmt = $db->prepare('SELECT * FROM projet_template WHERE id_projet = ?');
+    // Récupération du projet
+    $stmt = $pdo->prepare('SELECT * FROM projet_template WHERE id_projet = ?');
     $stmt->execute([$id_projet]);
     $projet = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Récupérer les outils utilisés
-    $stmt = $db->prepare('SELECT * FROM outils_utilises WHERE id_projet = ?');
-    $stmt->execute([$id_projet]);
-    $outils = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if (!$projet) {
+        header('Location: projets.php');
+        exit;
+    }
 
-    // Récupérer les avis
-    $stmt = $db->prepare('SELECT * FROM avis_projet WHERE id_projet = ?');
-    $stmt->execute([$id_projet]);
-    $avis = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    // Récupérer les images de contexte
-    $stmt = $db->prepare('SELECT * FROM images_contexte WHERE id_projet = ?');
+    // Récupération des images de contexte
+    $stmt = $pdo->prepare('SELECT * FROM images_contexte WHERE id_projet = ? ORDER BY id_image_contexte ASC');
     $stmt->execute([$id_projet]);
     $images_contexte = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // Récupérer les étapes
-    $stmt = $db->prepare('SELECT * FROM etapes_projet WHERE id_projet = ? ORDER BY id_etape');
+    // Récupération des outils
+    $stmt = $pdo->prepare('SELECT * FROM outils_utilises WHERE id_projet = ? ORDER BY id_outil ASC');
+    $stmt->execute([$id_projet]);
+    $outils = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Récupération des étapes
+    $stmt = $pdo->prepare('SELECT * FROM etapes_projet WHERE id_projet = ? ORDER BY id_etape ASC');
     $stmt->execute([$id_projet]);
     $etapes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    if (!$projet) {
-        header('Location: /portfolio_v01/projets.php');
-        exit;
-    }
+    // Récupération des avis
+    $stmt = $pdo->prepare('SELECT * FROM avis_projet WHERE id_projet = ? ORDER BY id_avis DESC');
+    $stmt->execute([$id_projet]);
+    $avis = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 } catch (Exception $e) {
-    header('Location: /portfolio_v01/projets.php');
+    error_log("Erreur : " . $e->getMessage());
+    header('Location: projets.php');
     exit;
 }
 
-include __DIR__ . '/config/inc/head.inc.php'; 
+include __DIR__ . '/config/inc/head.inc.php';
 ?>
     <title><?php echo htmlspecialchars($projet['titre']); ?> - Erwan CÉNAC</title>
 </head>
@@ -64,7 +71,12 @@ include __DIR__ . '/config/inc/head.inc.php';
                 <div class="projet-section-contenu">
                     <h1 class="titre_principal"><?php echo htmlspecialchars($projet['titre']); ?></h1>
                     <div class="projet-image-principale">
-                        <img src="/portfolio_v01/assets/images/projets/<?php echo htmlspecialchars($projet['image_principale']); ?>" 
+                        <?php
+                        $image_path = $projet['image_principale'];
+                        // Supprimer les préfixes "images/" et "projets/" s'ils existent
+                        $image_path = str_replace(['images/', 'projets/'], '', $image_path);
+                        ?>
+                        <img src="<?php echo asset('images/' . htmlspecialchars($image_path)); ?>" 
                              alt="<?php echo htmlspecialchars($projet['titre']); ?>">
                     </div>
                 </div>
@@ -85,7 +97,12 @@ include __DIR__ . '/config/inc/head.inc.php';
                             <?php foreach ($images_contexte as $index => $image): ?>
                             <div class="image-contexte <?php echo $index % 2 === 0 ? 'image-gauche' : 'image-droite'; ?>">
                                 <div class="image-wrapper">
-                                    <img src="/portfolio_v01/assets/images/projets/<?php echo htmlspecialchars($image['image']); ?>" 
+                                    <?php
+                                    $image_path = $image['image'];
+                                    // Supprimer les préfixes "images/" et "projets/" s'ils existent
+                                    $image_path = str_replace(['images/', 'projets/'], '', $image_path);
+                                    ?>
+                                    <img src="<?php echo asset('images/' . htmlspecialchars($image_path)); ?>" 
                                          alt="<?php echo htmlspecialchars($image['titre_contexte']); ?>">
                                 </div>
                                 <div class="texte-wrapper">
@@ -114,12 +131,7 @@ include __DIR__ . '/config/inc/head.inc.php';
                             <div class="etape-item">
                                 <div class="etape-numero"><?php echo $index + 1; ?></div>
                                 <div class="etape-content">
-                                    <?php if (!empty($etape['titre'])): ?>
-                                    <h3><?php echo htmlspecialchars($etape['titre']); ?></h3>
-                                    <?php endif; ?>
-                                    <?php if (!empty($etape['description'])): ?>
                                     <div class="texte"><?php echo nl2br(htmlspecialchars($etape['description'])); ?></div>
-                                    <?php endif; ?>
                                 </div>
                             </div>
                             <?php endforeach; ?>
@@ -135,7 +147,12 @@ include __DIR__ . '/config/inc/head.inc.php';
                             <div class="outil-item">
                                 <?php if (!empty($outil['image_outil'])): ?>
                                 <div class="outil-logo-wrapper">
-                                    <img src="/portfolio_v01/assets/images/<?php echo htmlspecialchars($outil['image_outil']); ?>" 
+                                    <?php
+                                    $image_path = $outil['image_outil'];
+                                    // Supprimer le préfixe "images/" s'il existe
+                                    $image_path = str_replace('images/', '', $image_path);
+                                    ?>
+                                    <img src="<?php echo asset('images/' . htmlspecialchars($image_path)); ?>" 
                                          alt="Logo <?php echo htmlspecialchars($outil['nom_outil']); ?>"
                                          class="outil-logo">
                                 </div>

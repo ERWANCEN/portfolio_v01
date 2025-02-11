@@ -1,48 +1,80 @@
+<?php
+// Vérifier si la session n'est pas déjà démarrée
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Vérifier si BASE_PATH n'est pas déjà défini
+if (!defined('BASE_PATH')) {
+    // Définition du chemin de base de l'application
+    $isLocal = strpos($_SERVER['HTTP_HOST'] ?? '', 'localhost') !== false 
+               || strpos($_SERVER['HTTP_HOST'] ?? '', ':8888') !== false;
+    define('BASE_PATH', $isLocal ? '/portfolio_v01' : '');
+}
+?>
+
 <header style="z-index:1003; position:relative;">
     <div class="container_header_tablette_desktop">
-        <a href="/portfolio_v01/" class="logo_container">
-            <img class="logo_nav_mode_jour logo_visible" src="/portfolio_v01/assets/images/logo_noir_sans_baseline.webp" alt="logo noir" loading="lazy">
-            <img class="logo_nav_mode_nuit" src="/portfolio_v01/assets/images/logo_blanc_sans_baseline.webp" alt="logo blanc" loading="lazy">
+        <a href="<?php echo BASE_PATH; ?>/" class="logo_container">
+            <img class="logo_nav_mode_jour logo_visible" src="<?php echo BASE_PATH; ?>/assets/images/logo_noir_sans_baseline.webp" alt="logo noir" loading="lazy">
+            <img class="logo_nav_mode_nuit" src="<?php echo BASE_PATH; ?>/assets/images/logo_blanc_sans_baseline.webp" alt="logo blanc" loading="lazy">
         </a>
 
         <div class="container_header">
             <div class="header_right_group">
-                <?php include __DIR__ . '/nav.inc.php'; ?>
-                <img src="/portfolio_v01/assets/images/france.webp" alt="" class="mode_langue" loading="lazy">
+                <nav id="nav_bar">
+                    <ul id="nav">
+                        <li><a class="texte_dark_mode" href="<?php echo BASE_PATH; ?>/index.php">Accueil</a></li>
+                        <li><a class="texte_dark_mode" href="<?php echo BASE_PATH; ?>/projets.php">Projets</a></li>
+                        <li><a class="texte_dark_mode" href="<?php echo BASE_PATH; ?>/index.php#container_qui_suis_je">À propos</a></li>
+                        <li><a class="texte_dark_mode" href="<?php echo BASE_PATH; ?>/contact.php">Contact</a></li>
+                    </ul>
+                </nav>
+                <img src="<?php echo BASE_PATH; ?>/assets/images/france.webp" alt="" class="mode_langue" loading="lazy">
                 <div class="mode_jour_nuit_container">
-                    <img class="mode_jour_nuit soleil visible" src="/portfolio_v01/assets/images/soleil_blanc.svg" alt="soleil indiquant le mode jour">
-                    <img class="mode_jour_nuit lune" src="/portfolio_v01/assets/images/lune_noire.svg" alt="lune indiquant le mode nuit">
+                    <div class="mode_jour_nuit">
+                        <img class="mode_jour_img" src="<?php echo BASE_PATH; ?>/assets/images/mode_jour.webp" alt="mode jour" loading="lazy">
+                        <img class="mode_nuit_img" src="<?php echo BASE_PATH; ?>/assets/images/mode_nuit.webp" alt="mode nuit" loading="lazy">
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="container_header_mobile">
-        <a href="/portfolio_v01/" class="logo_container">
-            <img class="logo_nav_mode_jour logo_visible" src="/portfolio_v01/assets/images/logo_noir_sans_baseline.webp" alt="logo noir" loading="lazy">
-            <img class="logo_nav_mode_nuit" src="/portfolio_v01/assets/images/logo_blanc_sans_baseline.webp" alt="logo blanc" loading="lazy">
-        </a>
-        <img src="/portfolio_v01/assets/images/france.webp" alt="" class="mode_langue" loading="lazy">
-        <div class="mode_jour_nuit_container">
-            <img class="mode_jour_nuit" src="/portfolio_v01/assets/images/soleil_blanc.svg" alt="soleil indiquant le mode jour">
+        <div class="container_header_mobile_top">
+            <a href="<?php echo BASE_PATH; ?>/" class="logo_container">
+                <img class="logo_nav_mode_jour logo_visible" src="<?php echo BASE_PATH; ?>/assets/images/logo_noir_sans_baseline.webp" alt="logo noir" loading="lazy">
+                <img class="logo_nav_mode_nuit" src="<?php echo BASE_PATH; ?>/assets/images/logo_blanc_sans_baseline.webp" alt="logo blanc" loading="lazy">
+            </a>
+            <div class="container_mode_langue_jour_nuit">
+                <img src="<?php echo BASE_PATH; ?>/assets/images/france.webp" alt="" class="mode_langue" loading="lazy">
+                <div class="mode_jour_nuit_container">
+                    <div class="mode_jour_nuit">
+                        <img class="mode_jour_img" src="<?php echo BASE_PATH; ?>/assets/images/mode_jour.webp" alt="mode jour" loading="lazy">
+                        <img class="mode_nuit_img" src="<?php echo BASE_PATH; ?>/assets/images/mode_nuit.webp" alt="mode nuit" loading="lazy">
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="mobile_menu_container">
-            <input type="checkbox" id="burger">
-            <label class="burger" for="burger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </label>
-            <div class="menu_panel">
-                <nav class="mobile_nav">
-                    <ul>
-                        <li><a class="texte_dark_mode" href="/portfolio_v01/index.php">Accueil</a></li>
-                        <li><a class="texte_dark_mode" href="/portfolio_v01/projets.php">Projets</a></li>
-                        <li><a class="texte_dark_mode" href="/portfolio_v01/index.php#container_qui_suis_je">À propos</a></li>
-                        <li><a class="texte_dark_mode" href="/portfolio_v01/contact.php">Contact</a></li>
-                    </ul>
-                </nav>
+
+        <div class="container_menu_burger">
+            <div class="menu_burger">
+                <span class="ligne_menu_burger ligne_menu_burger_dark_mode"></span>
+                <span class="ligne_menu_burger ligne_menu_burger_dark_mode"></span>
+                <span class="ligne_menu_burger ligne_menu_burger_dark_mode"></span>
             </div>
         </div>
     </div>
 </header>
+
+<div class="menu_mobile">
+    <nav>
+        <ul>
+            <li><a class="texte_dark_mode" href="<?php echo BASE_PATH; ?>/index.php">Accueil</a></li>
+            <li><a class="texte_dark_mode" href="<?php echo BASE_PATH; ?>/projets.php">Projets</a></li>
+            <li><a class="texte_dark_mode" href="<?php echo BASE_PATH; ?>/index.php#container_qui_suis_je">À propos</a></li>
+            <li><a class="texte_dark_mode" href="<?php echo BASE_PATH; ?>/contact.php">Contact</a></li>
+        </ul>
+    </nav>
+</div>

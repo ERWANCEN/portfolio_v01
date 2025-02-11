@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../../config/paths.php';
 $pageTitle = 'Tableau de bord - Portfolio';
 
 ob_start();
@@ -9,8 +10,8 @@ ob_start();
 
 <div class="dashboard-container">
     <ul id="ul_tableau_de_bord">
-        <li class="li_tableau_de_bord"><a class="liens_tableau_de_bord texte_dark_mode" href="/portfolio_v01/admin/contacts/index.php">Gérer les messages de contact</a></li>
-        <li class="li_tableau_de_bord"><a class="liens_tableau_de_bord texte_dark_mode" href="/portfolio_v01/admin/projets/list.php">Gérer les projets</a></li>
+        <li class="li_tableau_de_bord"><a class="liens_tableau_de_bord texte_dark_mode" href="<?= BASE_PATH ?>/admin/contacts/index.php">Gérer les messages de contact</a></li>
+        <li class="li_tableau_de_bord"><a class="liens_tableau_de_bord texte_dark_mode" href="<?= BASE_PATH ?>/admin/projets/list.php">Gérer les projets</a></li>
     </ul>
 </div>
 

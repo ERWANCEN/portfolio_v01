@@ -1,5 +1,10 @@
 <?php
+require_once __DIR__ . '/paths.php';
 
-function getProjectUrl($projectId) {
-    return '/portfolio_v01/projet.php?id=' . $projectId;
+function getProjectUrl($id) {
+    return BASE_PATH . '/projet.php?id=' . $id;
+}
+
+function asset($path) {
+    return BASE_PATH . '/assets/' . ltrim($path, '/');
 }

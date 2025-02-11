@@ -1,26 +1,38 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-require_once '../../autoload.php';
-require_once '../../config/auth.php';
+require_once __DIR__ . '/../../autoload.php';
+require_once __DIR__ . '/../auth.php';
 
-requireLogin();
+use Config\Database;
+
+requireAdmin();
+
+$pdo = Database::getConnection();
+
+// Vérification de l'ID
+if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
+    header('Location: ' . BASE_PATH . '/admin/projets/');
+    exit();
+}
+
+try {
+    $stmt = $pdo->prepare('SELECT * FROM projet_template WHERE id_projet = ?');
+    $stmt->execute([$_GET['id']]);
+    $projet = $stmt->fetch();
+    
+    if (!$projet) {
+        header('Location: ' . BASE_PATH . '/admin/projets/');
+        exit();
+    }
+} catch (Exception $e) {
+    header('Location: ' . BASE_PATH . '/admin/projets/');
+    exit();
+}
 
 use Controllers\ProjetController;
 
-$id = $_GET['id'] ?? null;
-
-if ($id) {
-    $controller = new ProjetController();
-    $projet = $controller->getProjet($id);
-    
-    if ($projet) {
-        // Récupérer les informations supplémentaires
-        $controller->showProjet($id);
-    } else {
-        header('Location: /portfolio_v01/admin/projets/');
-        exit();
-    }
-} else {
-    header('Location: /portfolio_v01/admin/projets/');
-    exit();
-}
+$controller = new ProjetController();
+$controller->showProjet($_GET['id']);

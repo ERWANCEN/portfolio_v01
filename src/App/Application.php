@@ -4,22 +4,15 @@ namespace App;
 
 use Exception;
 use App\PageRenderer;
+use Config\Database;
 
 class Application
 {
+    private $pdo;
+
     public function __construct()
     {
-        $this->loadConfig();
-    }
-
-    private function loadConfig()
-    {
-        $configPath = __DIR__ . '/../../config/config.php';
-        if (!file_exists($configPath)) {
-            throw new Exception("Fichier de configuration introuvable : $configPath");
-        }
-
-        require_once $configPath;
+        $this->pdo = Database::getConnection();
     }
 
     public function run()
