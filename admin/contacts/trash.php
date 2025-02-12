@@ -9,3 +9,11 @@ use Controllers\ContactController;
 
 $controller = new ContactController();
 $controller->listContacts(true); // true pour afficher les messages supprimés
+
+?>
+
+<body>
+    <div id="container_general">
+        <?php include __DIR__ . '/../../config/inc/admin_header.inc.php'; ?>
+    </div>
+</body>

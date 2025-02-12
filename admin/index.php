@@ -34,5 +34,62 @@ try {
     exit();
 }
 
-// Inclure la vue du tableau de bord
-require_once __DIR__ . '/../views/admin/dashboard.php';
+// Connexion à la base de données
+$pdo = DataBase::getConnection();
+
+// Récupérer les statistiques
+try {
+    // Compter les messages non supprimés
+    $query = "SELECT COUNT(*) as count FROM message_contact WHERE supprime = 0";
+    $stmt = $pdo->query($query);
+    $messagesCount = $stmt->fetch(PDO::FETCH_ASSOC)['count'];
+
+    // Compter les projets
+    $query = "SELECT COUNT(*) as count FROM projet_template";
+    $stmt = $pdo->query($query);
+    $projetsCount = $stmt->fetch(PDO::FETCH_ASSOC)['count'];
+} catch (Exception $e) {
+    error_log("Erreur lors de la récupération des statistiques : " . $e->getMessage());
+    $messagesCount = 0;
+    $projetsCount = 0;
+}
+?>
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de bord - Administration</title>
+    <link rel="stylesheet" href="<?= BASE_PATH ?>/assets/css/style.css">
+</head>
+<body>
+    <div id="container_general">
+        <?php include __DIR__ . '/../config/inc/admin_header.inc.php'; ?>
+        
+        <main>
+            <div class="admin-container">
+                <h1 class="titre_principal">Tableau de bord</h1>
+                
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <h3>Messages</h3>
+                        <p class="stat-number"><?= $messagesCount ?></p>
+                        <a href="<?= BASE_PATH ?>/admin/contacts/index.php" class="stat-link">Voir tous les messages</a>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <h3>Projets</h3>
+                        <p class="stat-number"><?= $projetsCount ?></p>
+                        <a href="<?= BASE_PATH ?>/admin/projets/list.php" class="stat-link">Gérer les projets</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <?php include __DIR__ . '/../config/inc/footer.inc.php'; ?>
+    </div>
+
+    <script src="<?= BASE_PATH ?>/assets/js/dark_mode.js"></script>
+</body>
+</html>

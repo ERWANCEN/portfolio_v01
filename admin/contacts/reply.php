@@ -49,50 +49,53 @@ $pageTitle = 'Répondre au message';
 ob_start();
 ?>
 
-<div class="admin-container">
-    <h1 class="texte_dark_mode">Répondre au message</h1>
+<div id="container_general">
+    <?php include __DIR__ . '/../../config/inc/admin_header.inc.php'; ?>
+    <div class="admin-container">
+        <h1 class="texte_dark_mode">Répondre au message</h1>
 
-    <?php if ($error): ?>
-        <div class="error-message"><?= htmlspecialchars($error) ?></div>
-    <?php endif; ?>
+        <?php if ($error): ?>
+            <div class="error-message"><?= htmlspecialchars($error) ?></div>
+        <?php endif; ?>
 
-    <?php if ($success): ?>
-        <div class="success-message"><?= htmlspecialchars($success) ?></div>
-    <?php endif; ?>
+        <?php if ($success): ?>
+            <div class="success-message"><?= htmlspecialchars($success) ?></div>
+        <?php endif; ?>
 
-    <?php if ($message): ?>
-        <div class="message-details">
-            <h2 class="texte_dark_mode">Message original</h2>
-            <div class="message-info">
-                <p><strong>De :</strong> <?= htmlspecialchars($message['nom']) ?> (<?= htmlspecialchars($message['email']) ?>)</p>
-                <p><strong>Date :</strong> <?= htmlspecialchars(date('d/m/Y H:i', strtotime($message['date_envoi']))) ?></p>
-                <p><strong>Message :</strong></p>
-                <div class="message-content">
-                    <?= nl2br(htmlspecialchars($message['message'])) ?>
+        <?php if ($message): ?>
+            <div class="message-details">
+                <h2 class="texte_dark_mode">Message original</h2>
+                <div class="message-info">
+                    <p><strong>De :</strong> <?= htmlspecialchars($message['nom']) ?> (<?= htmlspecialchars($message['email']) ?>)</p>
+                    <p><strong>Date :</strong> <?= htmlspecialchars(date('d/m/Y H:i', strtotime($message['date_envoi']))) ?></p>
+                    <p><strong>Message :</strong></p>
+                    <div class="message-content">
+                        <?= nl2br(htmlspecialchars($message['message'])) ?>
+                    </div>
                 </div>
+
+                <form method="post" class="reply-form">
+                    <div class="form-group">
+                        <label for="email" class="texte_dark_mode">Email du destinataire :</label>
+                        <input type="email" id="email" name="email" value="<?= htmlspecialchars($message['email']) ?>" readonly class="input_form texte_dark_mode">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reply" class="texte_dark_mode">Votre réponse :</label>
+                        <textarea id="reply" name="reply" required class="input_form texte_dark_mode" rows="10"></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="cta">Envoyer la réponse</button>
+                        <a href="<?= BASE_PATH ?>/admin/contacts/index.php" class="back-link">Retour à la liste</a>
+                    </div>
+                </form>
             </div>
-
-            <form method="post" class="reply-form">
-                <div class="form-group">
-                    <label for="email" class="texte_dark_mode">Email du destinataire :</label>
-                    <input type="email" id="email" name="email" value="<?= htmlspecialchars($message['email']) ?>" readonly class="input_form texte_dark_mode">
-                </div>
-
-                <div class="form-group">
-                    <label for="reply" class="texte_dark_mode">Votre réponse :</label>
-                    <textarea id="reply" name="reply" required class="input_form texte_dark_mode" rows="10"></textarea>
-                </div>
-
-                <div class="form-actions">
-                    <button type="submit" class="cta">Envoyer la réponse</button>
-                    <a href="<?= BASE_PATH ?>/admin/contacts/index.php" class="back-link">Retour à la liste</a>
-                </div>
-            </form>
-        </div>
-    <?php else: ?>
-        <p class="texte_dark_mode">Message non trouvé.</p>
-        <a href="<?= BASE_PATH ?>/admin/contacts/index.php" class="back-link">Retour à la liste</a>
-    <?php endif; ?>
+        <?php else: ?>
+            <p class="texte_dark_mode">Message non trouvé.</p>
+            <a href="<?= BASE_PATH ?>/admin/contacts/index.php" class="back-link">Retour à la liste</a>
+        <?php endif; ?>
+    </div>
 </div>
 
 <?php

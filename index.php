@@ -15,22 +15,38 @@ session_start();
 try {
     $pdo = DataBase::getConnection();
 
-    // Récupération des projets
-    $stmt = $pdo->query('SELECT * FROM projet_template ORDER BY id_projet DESC');
+    // Récupération des 4 projets les plus récents
+    $query = 'SELECT * FROM projet_template ORDER BY id_projet DESC LIMIT 4';
+    $stmt = $pdo->prepare($query);
+    $stmt->execute();
     $projets = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    // Échapper les données pour l'affichage
+    $projets = array_map(function($projet) {
+        return array_map('escapeHtml', $projet);
+    }, $projets);
 } catch (Exception $e) {
-    die("Erreur : " . $e->getMessage());
+    $projets = [];
+    error_log("Erreur : " . $e->getMessage());
 }
 ?>
 
-<?php include __DIR__ . '/config/inc/head.inc.php'; ?>
+<?php 
+if (!secureInclude('config/inc/head.inc.php')) {
+    die('Erreur : Impossible de charger le head');
+}
+?>
 <title>Portfolio - Erwan CÉNAC</title>
 
 </head>
 <body>
     <div id="container_general">
 
-        <?php include __DIR__ . '/config/inc/header.inc.php'; ?>
+        <?php 
+        if (!secureInclude('config/inc/header.inc.php')) {
+            die('Erreur : Impossible de charger le header');
+        }
+        ?>
 
         <div id="container_bandeau_deroulant">
             <div class="bande_jaune" id="bande_jaune_haut"></div>
@@ -45,8 +61,8 @@ try {
         </div>
 
         <div id="container_projets">
-            <h2 id="mes_réalisations" class="titre_principal">Mes réalisations</h2>
-            <div id="projets_grid">
+            <h2 id="titre_projets" class="titre_principal">Mes réalisations</h2>
+            <!-- <div id="projets_grid"> -->
                 <!-- <button id="projets_dev">dev</button>
                 <button id="projets_design">design</button> -->
                 <p class="texte" id="texte_projets_dev">Découvrez mes projets en développement web, mettant en avant la performance, l'écologie et une UX optimisée.</p>
@@ -54,7 +70,7 @@ try {
                 <?php foreach ($projets as $projet): ?>
                 <a href="<?php echo getProjectUrl($projet['id_projet']); ?>" class="vignette_projet">
                     <div class="container_image_projet">
-                        <img class="image_projet" src="<?php echo asset('images/projets/' . htmlspecialchars($projet['image_principale'])); ?>" alt="<?php echo htmlspecialchars($projet['titre']); ?>">
+                        <img class="image_projet" src="<?php echo asset('images/' . htmlspecialchars($projet['image_principale'])); ?>" alt="<?php echo htmlspecialchars($projet['titre']); ?>">
                     </div>
                     <div class="bas_vignette">
                         <h3 class="nom_du_projet"><?php echo htmlspecialchars($projet['titre']); ?></h3>
@@ -63,7 +79,7 @@ try {
                 </a>
                 <?php endforeach; ?>
                 <a class="cta" href="projets.php">Voir tous les projets</a>
-            </div>
+            <!-- </div> -->
         </div>
 
         <section id="container_qui_suis_je">
@@ -140,4 +156,8 @@ try {
 
 
 
-        <?php include __DIR__ . '/config/inc/footer.inc.php'; ?>
+        <?php 
+        if (!secureInclude('config/inc/footer.inc.php')) {
+            die('Erreur : Impossible de charger le footer');
+        }
+        ?>

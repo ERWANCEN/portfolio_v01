@@ -2,10 +2,31 @@
 if (!defined('BASE_PATH')) {
     require_once __DIR__ . '/../paths.php';
 }
+$current_page = basename($_SERVER['PHP_SELF']);
 ?>
-<nav class="nav_tablette_desktop nav_admin">
-    <a href="<?= BASE_PATH ?>/admin/index.php">Tableau de bord</a>
-    <a href="<?= BASE_PATH ?>/admin/contacts/index.php">Messages</a>
-    <a href="<?= BASE_PATH ?>/admin/projets/list.php">Projets</a>
-    <a href="<?= BASE_PATH ?>/admin/logout.php" class="deconnexion">Déconnexion</a>
-</nav>
+<header class="admin-header">
+    <nav class="admin-nav">
+        <ul class="admin-menu">
+            <li>
+                <a href="<?= BASE_PATH ?>/admin/dashboard.php" class="<?= $current_page === 'dashboard.php' ? 'active' : '' ?>">
+                    Tableau de bord
+                </a>
+            </li>
+            <li>
+                <a href="<?= BASE_PATH ?>/admin/messages/list.php" class="<?= strpos($current_page, 'messages') !== false ? 'active' : '' ?>">
+                    Messages
+                </a>
+            </li>
+            <li>
+                <a href="<?= BASE_PATH ?>/admin/projets/list.php" class="<?= strpos($current_page, 'projets') !== false ? 'active' : '' ?>">
+                    Projets
+                </a>
+            </li>
+            <li>
+                <a href="<?= BASE_PATH ?>/admin/logout.php">
+                    Déconnexion
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>

@@ -32,10 +32,14 @@ if (!defined('BASE_PATH')) {
                 </nav>
                 <img src="<?php echo BASE_PATH; ?>/assets/images/france.webp" alt="" class="mode_langue" loading="lazy">
                 <div class="mode_jour_nuit_container">
-                    <div class="mode_jour_nuit">
-                        <img class="mode_jour_img" src="<?php echo BASE_PATH; ?>/assets/images/mode_jour.webp" alt="mode jour" loading="lazy">
-                        <img class="mode_nuit_img" src="<?php echo BASE_PATH; ?>/assets/images/mode_nuit.webp" alt="mode nuit" loading="lazy">
-                    </div>
+                    <button class="mode_jour_nuit" aria-label="Changer le mode jour/nuit">
+                        <div class="mode_jour">
+                            <img class="mode_jour_img" src="<?php echo BASE_PATH; ?>/assets/images/soleil_mode_jour.svg" alt="mode jour">
+                        </div>
+                        <div class="mode_nuit">
+                            <img class="mode_nuit_img" src="<?php echo BASE_PATH; ?>/assets/images/lune_noire.svg" alt="mode nuit">
+                        </div>
+                    </button>
                 </div>
             </div>
         </div>
@@ -50,10 +54,14 @@ if (!defined('BASE_PATH')) {
             <div class="container_mode_langue_jour_nuit">
                 <img src="<?php echo BASE_PATH; ?>/assets/images/france.webp" alt="" class="mode_langue" loading="lazy">
                 <div class="mode_jour_nuit_container">
-                    <div class="mode_jour_nuit">
-                        <img class="mode_jour_img" src="<?php echo BASE_PATH; ?>/assets/images/mode_jour.webp" alt="mode jour" loading="lazy">
-                        <img class="mode_nuit_img" src="<?php echo BASE_PATH; ?>/assets/images/mode_nuit.webp" alt="mode nuit" loading="lazy">
-                    </div>
+                    <button class="mode_jour_nuit" aria-label="Changer le mode jour/nuit">
+                        <div class="mode_jour">
+                            <img class="mode_jour_img" src="<?php echo BASE_PATH; ?>/assets/images/soleil_mode_jour.svg" alt="mode jour">
+                        </div>
+                        <div class="mode_nuit">
+                            <img class="mode_nuit_img" src="<?php echo BASE_PATH; ?>/assets/images/lune_noire.svg" alt="mode nuit">
+                        </div>
+                    </button>
                 </div>
             </div>
         </div>

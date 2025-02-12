@@ -25,6 +25,10 @@ ErrorDocument 404 /404.php
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
+# Redirection du favicon.ico vers favicon-32x32.png
+RewriteCond %{REQUEST_URI} ^/favicon\.ico$
+RewriteRule ^favicon\.ico$ /portfolio_v01/assets/images/favicon-32x32.png [L]
+
 # Protection des fichiers sensibles
 <FilesMatch "^\.">
     Order allow,deny

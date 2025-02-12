@@ -36,7 +36,7 @@ include __DIR__ . '/config/inc/head.inc.php';
                 <?php foreach ($projets as $projet): ?>
                 <a href="projet.php?id=<?php echo htmlspecialchars($projet['id_projet']); ?>" class="vignette_projet">
                     <div class="container_image_projet">
-                        <img class="image_projet" src="<?php echo asset('images/projets/' . htmlspecialchars($projet['image_principale'])); ?>" alt="<?php echo htmlspecialchars($projet['titre']); ?>">
+                        <img class="image_projet" src="<?php echo asset('images/' . htmlspecialchars($projet['image_principale'])); ?>" alt="<?php echo htmlspecialchars($projet['titre']); ?>">
                     </div>
                     <div class="bas_vignette">
                         <h3 class="nom_du_projet"><?php echo htmlspecialchars($projet['titre']); ?></h3>
@@ -44,6 +44,7 @@ include __DIR__ . '/config/inc/head.inc.php';
                     </div>
                 </a>
                 <?php endforeach; ?>
+                <a class="cta" href="https://github.com/ERWANCEN" target="_blank">Accéder à GitHub</a>
             </section>
         </main>
 

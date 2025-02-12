@@ -1,8 +1,4 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 require_once __DIR__ . '/../../config/paths.php';
 require_once __DIR__ . '/../../autoload.php';
 require_once __DIR__ . '/../auth.php';
@@ -16,49 +12,82 @@ $pdo = Database::getConnection();
 
 // Récupération des projets
 try {
-    $stmt = $pdo->query('SELECT * FROM projet_template ORDER BY id_projet DESC');
+    $query = 'SELECT id_projet, titre, date_creation, image_principale 
+              FROM projet_template 
+              ORDER BY date_creation DESC';
+    $stmt = $pdo->prepare($query);
+    $stmt->execute();
     $projets = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (Exception $e) {
+    error_log("Erreur lors de la récupération des projets : " . $e->getMessage());
     $projets = [];
 }
-
-ob_start();
 ?>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?= $pageTitle ?></title>
+    <link rel="stylesheet" href="<?= BASE_PATH ?>/assets/css/style.css">
+</head>
+<body>
+    <div id="container_general">
+        <?php include __DIR__ . '/../../config/inc/admin_header.inc.php'; ?>
+        
+        <main>
+            <div class="admin-container">
+                <h1 class="titre_principal">Projets</h1>
 
-<div class="admin-container">
-    <h1 class="texte_dark_mode">Liste des projets</h1>
-    <a href="<?= BASE_PATH ?>/admin/projets/create.php" class="cta">Ajouter un projet</a>
+                <?php if (isset($_GET['success'])): ?>
+                    <div class="success-message">
+                        Le projet a été supprimé avec succès.
+                    </div>
+                <?php endif; ?>
 
-    <?php if (!empty($projets)): ?>
-        <table class="admin-table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Titre</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($projets as $projet): ?>
-                    <tr>
-                        <td><?= htmlspecialchars($projet['id_projet']) ?></td>
-                        <td><?= htmlspecialchars($projet['titre']) ?></td>
-                        <td>
-                            <a href="<?= BASE_PATH ?>/admin/projets/edit.php?id=<?= $projet['id_projet'] ?>" class="btn-edit">Modifier</a>
-                            <a href="<?= BASE_PATH ?>/admin/projets/delete.php?id=<?= $projet['id_projet'] ?>" class="btn-delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce projet ?')">Supprimer</a>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    <?php else: ?>
-        <p class="texte_dark_mode">Aucun projet n'a été trouvé.</p>
-    <?php endif; ?>
+                <?php if (isset($_GET['error'])): ?>
+                    <div class="error-message">
+                        Une erreur est survenue lors du traitement de votre demande.
+                    </div>
+                <?php endif; ?>
 
-    <a href="<?= BASE_PATH ?>/admin/" class="back-link">Retour au tableau de bord</a>
-</div>
+                <div class="admin-actions">
+                    <a href="<?= BASE_PATH ?>/admin/projets/create.php" class="btn-reply">Ajouter un projet</a>
+                </div>
 
-<?php
-$content = ob_get_clean();
-require __DIR__ . '/../../views/admin/template.php';
-?>
+                <?php if (empty($projets)): ?>
+                    <p class="no-messages">Aucun projet</p>
+                <?php else: ?>
+                    <div class="messages-list">
+                        <?php foreach ($projets as $projet): ?>
+                            <div class="message-item">
+                                <div class="message-header">
+                                    <div class="message-info">
+                                        <strong><?= htmlspecialchars($projet['titre']) ?></strong>
+                                        <span>Créé le <?= (new DateTime($projet['date_creation']))->format('d/m/Y H:i') ?></span>
+                                    </div>
+                                    <div class="message-actions">
+                                        <a href="<?= BASE_PATH ?>/admin/projets/edit.php?id=<?= $projet['id_projet'] ?>" class="btn-reply">Modifier</a>
+                                        <a href="<?= BASE_PATH ?>/admin/projets/delete.php?id=<?= $projet['id_projet'] ?>" class="btn-delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce projet ?')">Supprimer</a>
+                                    </div>
+                                </div>
+                                <?php if (!empty($projet['image_principale'])): ?>
+                                <div class="project-preview">
+                                    <img src="<?= BASE_PATH ?>/assets/images/<?= htmlspecialchars($projet['image_principale']) ?>" 
+                                         alt="Aperçu de <?= htmlspecialchars($projet['titre']) ?>"
+                                         class="preview-image">
+                                </div>
+                                <?php endif; ?>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </main>
+
+        <?php include __DIR__ . '/../../config/inc/footer.inc.php'; ?>
+    </div>
+
+    <script src="<?= BASE_PATH ?>/assets/js/dark_mode.js"></script>
+</body>
+</html>
