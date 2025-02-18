@@ -33,12 +33,12 @@ if (!defined('BASE_PATH')) {
                 <img src="<?php echo BASE_PATH; ?>/assets/images/france.webp" alt="" class="mode_langue" loading="lazy">
                 <div class="mode_jour_nuit_container">
                     <button class="mode_jour_nuit" aria-label="Changer le mode jour/nuit">
-                        <div class="mode_jour">
-                            <img class="mode_jour_img" src="<?php echo BASE_PATH; ?>/assets/images/soleil_mode_jour.svg" alt="mode jour">
-                        </div>
-                        <div class="mode_nuit">
+                        <span class="mode_jour">
+                            <img class="mode_jour_img" src="<?php echo BASE_PATH; ?>/assets/images/soleil_blanc.svg" alt="mode jour">
+                        </span>
+                        <span class="mode_nuit">
                             <img class="mode_nuit_img" src="<?php echo BASE_PATH; ?>/assets/images/lune_noire.svg" alt="mode nuit">
-                        </div>
+                        </span>
                     </button>
                 </div>
             </div>
@@ -46,31 +46,30 @@ if (!defined('BASE_PATH')) {
     </div>
 
     <div class="container_header_mobile">
-        <div class="container_header_mobile_top">
-            <a href="<?php echo BASE_PATH; ?>/" class="logo_container">
-                <img class="logo_nav_mode_jour logo_visible" src="<?php echo BASE_PATH; ?>/assets/images/logo_noir_sans_baseline.webp" alt="logo noir" loading="lazy">
-                <img class="logo_nav_mode_nuit" src="<?php echo BASE_PATH; ?>/assets/images/logo_blanc_sans_baseline.webp" alt="logo blanc" loading="lazy">
-            </a>
+        <a href="<?php echo BASE_PATH; ?>/" class="logo_container">
+            <img class="logo_nav_mode_jour logo_visible" src="<?php echo BASE_PATH; ?>/assets/images/logo_noir_sans_baseline.webp" alt="logo noir" loading="lazy">
+            <img class="logo_nav_mode_nuit" src="<?php echo BASE_PATH; ?>/assets/images/logo_blanc_sans_baseline.webp" alt="logo blanc" loading="lazy">
+        </a>
+        <div class="mobile_controls">
             <div class="container_mode_langue_jour_nuit">
                 <img src="<?php echo BASE_PATH; ?>/assets/images/france.webp" alt="" class="mode_langue" loading="lazy">
                 <div class="mode_jour_nuit_container">
                     <button class="mode_jour_nuit" aria-label="Changer le mode jour/nuit">
-                        <div class="mode_jour">
-                            <img class="mode_jour_img" src="<?php echo BASE_PATH; ?>/assets/images/soleil_mode_jour.svg" alt="mode jour">
-                        </div>
-                        <div class="mode_nuit">
+                        <span class="mode_jour">
+                            <img class="mode_jour_img" src="<?php echo BASE_PATH; ?>/assets/images/soleil_blanc.svg" alt="mode jour">
+                        </span>
+                        <span class="mode_nuit">
                             <img class="mode_nuit_img" src="<?php echo BASE_PATH; ?>/assets/images/lune_noire.svg" alt="mode nuit">
-                        </div>
+                        </span>
                     </button>
                 </div>
             </div>
-        </div>
-
-        <div class="container_menu_burger">
-            <div class="menu_burger">
-                <span class="ligne_menu_burger ligne_menu_burger_dark_mode"></span>
-                <span class="ligne_menu_burger ligne_menu_burger_dark_mode"></span>
-                <span class="ligne_menu_burger ligne_menu_burger_dark_mode"></span>
+            <div class="container_menu_burger">
+                <div class="menu_burger">
+                    <span class="ligne_menu_burger ligne_menu_burger_dark_mode"></span>
+                    <span class="ligne_menu_burger ligne_menu_burger_dark_mode"></span>
+                    <span class="ligne_menu_burger ligne_menu_burger_dark_mode"></span>
+                </div>
             </div>
         </div>
     </div>
@@ -86,3 +85,5 @@ if (!defined('BASE_PATH')) {
         </ul>
     </nav>
 </div>
+
+<script src="<?php echo BASE_PATH; ?>/assets/js/menu.js"></script>

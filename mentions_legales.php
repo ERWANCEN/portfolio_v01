@@ -1,17 +1,19 @@
-<?php include "./config/inc/head.inc.php"; ?>
-<?php include __DIR__ . '/config/inc/head.inc.php'; ?>
+<?php 
+require_once __DIR__ . '/config/paths.php';
+include __DIR__ . '/config/inc/head.inc.php'; 
+?>
 
 <title>Mentions légales - Erwan CÉNAC</title>
 
 </head>
 <body>
     <div id="container_general">
-
         <?php include __DIR__ . '/config/inc/header.inc.php'; ?>
 
         <div id="container_mentions_legales">
-            <h1 class="titre_principal texte_dark_mode">Mentions légales</h1>
             <div id="container_contenu_mentions_legales">
+                <h1 class="titre_principal texte_dark_mode">Mentions légales</h1>
+
                 <h2 class="texte_dark_mode">1. Éditeur du site</h2>
                 <p class="texte_dark_mode">Erwan CÉNAC</p>
 
@@ -33,4 +35,8 @@
             </div>
         </div>
 
-    <?php include __DIR__ . '/config/inc/footer.inc.php'; ?>
+        <?php include __DIR__ . '/config/inc/footer.inc.php'; ?>
+    </div>
+    <script src="<?php echo BASE_PATH; ?>/assets/js/script.js"></script>
+</body>
+</html>

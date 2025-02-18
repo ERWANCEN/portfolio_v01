@@ -99,59 +99,69 @@ if (!secureInclude('config/inc/head.inc.php')) {
         </section>
 
         <div id="container_competences">
-            <h2 id="compétences" class="titre_principal texte_dark_mode">Mes compétences</h2>
+            <h2 id="competences" class="titre_principal texte_dark_mode">Mes compétences</h2>
 
-            <h3 id="langages" class="sous_titre sous_titre_competences texte_dark_mode">Langages</h3>
-            <div class="container_ligne_pointille_et_logos">
-            <div class="ligne_pointille"></div>
-                <img id="html" class="logos_langages" src="<?php echo asset('images/html.webp'); ?>" alt="Logo du langage de balisage HTML." height="65px" loading="lazy" title="HTML">
-                <img id="css" class="logos_langages" src="<?php echo asset('images/css_nouveau_logo.webp'); ?>" alt="Logo du langage informatique CSS." height="65px" loading="lazy" title="CSS">
-                <img id="javascript" class="logos_langages" src="<?php echo asset('images/javascript.webp'); ?>" alt="Logo du langage de programmation JaveScript." height="65px" loading="lazy" title="JavaScript">
-                <img id="php" class="logos_langages" src="<?php echo asset('images/php.webp'); ?>" alt="Logo du langage de programmation PHP." height="65px" loading="lazy" title="PHP">
+            <div class="each_competence">
+                <h3 id="langages" class="sous_titre sous_titre_competences texte_dark_mode">Langages</h3>
+                <div class="container_ligne_pointille_et_logos">
+                <div class="ligne_pointille"></div>
+                    <img id="html" class="logos_langages" src="<?php echo asset('images/html.webp'); ?>" alt="Logo du langage de balisage HTML." height="65px" loading="lazy" title="HTML">
+                    <img id="css" class="logos_langages" src="<?php echo asset('images/css_nouveau_logo.webp'); ?>" alt="Logo du langage informatique CSS." height="65px" loading="lazy" title="CSS">
+                    <img id="javascript" class="logos_langages" src="<?php echo asset('images/javascript.webp'); ?>" alt="Logo du langage de programmation JaveScript." height="65px" loading="lazy" title="JavaScript">
+                    <img id="php" class="logos_langages" src="<?php echo asset('images/php.webp'); ?>" alt="Logo du langage de programmation PHP." height="65px" loading="lazy" title="PHP">
+                </div>
             </div>
 
-            <h3 id="frameworks" class="sous_titre sous_titre_competences texte_dark_mode">Frameworks</h3>
-            <div class="container_ligne_pointille_et_logos">
-                <div class="ligne_pointille"></div>
-                <img id="vuejs" class="logos_langages" src="<?php echo asset('images/vuejs.webp'); ?>" alt="Logo du frameword JavaScript open-source VueJS." height="65px" loading="lazy" title="VueJS">
-                <img id="symfony" class="logos_langages" src="<?php echo asset('images/symfony.webp'); ?>" alt="Logo du framework modèle-vue-contrôleur Symfony." height="65px" loading="lazy" title="Symfony">
+            <div class="each_competence">
+                <h3 id="frameworks" class="sous_titre sous_titre_competences texte_dark_mode">Frameworks</h3>
+                <div class="container_ligne_pointille_et_logos">
+                    <div class="ligne_pointille"></div>
+                    <img id="vuejs" class="logos_langages" src="<?php echo asset('images/vuejs.webp'); ?>" alt="Logo du frameword JavaScript open-source VueJS." height="65px" loading="lazy" title="VueJS">
+                    <img id="symfony" class="logos_langages" src="<?php echo asset('images/symfony.webp'); ?>" alt="Logo du framework modèle-vue-contrôleur Symfony." height="65px" loading="lazy" title="Symfony">
+                </div>
             </div>
             
-
-            <h3 id="sgbdr" class="sous_titre sous_titre_competences texte_dark_mode">SGBDR</h3>
-            <div class="container_ligne_pointille_et_logos">
-                <div class="ligne_pointille"></div>
-                <img id="mysql" class="logos_langages" src="<?php echo asset('images/mysql.webp'); ?>" alt="Logo du système de gestion de bases de données MySQL." height="65px" loading="lazy" title="MySQL">
+            <div class="each_competence">
+                <h3 id="sgbdr" class="sous_titre sous_titre_competences texte_dark_mode">SGBDR</h3>
+                <div class="container_ligne_pointille_et_logos">
+                    <div class="ligne_pointille"></div>
+                    <img id="mysql" class="logos_langages" src="<?php echo asset('images/mysql.webp'); ?>" alt="Logo du système de gestion de bases de données MySQL." height="65px" loading="lazy" title="MySQL">
+                </div>
             </div>
             
-            <h3 id="plateformes_web_collaboratives" class="sous_titre sous_titre_competences texte_dark_mode">Plateformes web collaboratives</h3>
-            <div class="container_ligne_pointille_et_logos">
-                <div class="ligne_pointille"></div>
-                <a id="logo_github"href="https://github.com/ERWANCEN" target="_blank">
-                    <img class="logos_langages github_logo_jour" src="<?php echo asset('images/github.webp'); ?>" alt="Logo GitHub" height="65px" loading="lazy" title="GitHub">
-                    <img class="logos_langages github_logo_nuit" src="<?php echo asset('images/github_blanc.webp'); ?>" alt="Logo GitHub" height="65px" loading="lazy" title="GitHub">
-                </a>
-
+            <div class="each_competence">
+                <h3 id="plateformes_web_collaboratives" class="sous_titre sous_titre_competences texte_dark_mode">Plateformes web collaboratives</h3>
+                <div class="container_ligne_pointille_et_logos">
+                    <div class="ligne_pointille"></div>
+                    <a id="logo_github"href="https://github.com/ERWANCEN" target="_blank">
+                        <img class="logos_langages github_logo_jour" src="<?php echo asset('images/github.webp'); ?>" alt="Logo GitHub" height="65px" loading="lazy" title="GitHub">
+                        <img class="logos_langages github_logo_nuit" src="<?php echo asset('images/github_blanc.webp'); ?>" alt="Logo GitHub" height="65px" loading="lazy" title="GitHub">
+                    </a>
+                </div>
             </div>
 
-            <h3 id="wordpress" class="sous_titre sous_titre_competences texte_dark_mode">WordPress</h3>
-            <div class="container_ligne_pointille_et_logos">
-                <div class="ligne_pointille"></div>
-                <a href="https://wordpress.org/" target="_blank"><img id="wordpress_logo" class="logos_langages" src="<?php echo asset('images/wordpress.webp'); ?>" alt="Logo du CMS (content management system) WordPress." height="65px" loading="lazy" title="WordPress"></a>
+            <div class="each_competence">
+                <h3 id="wordpress" class="sous_titre sous_titre_competences texte_dark_mode">WordPress</h3>
+                <div class="container_ligne_pointille_et_logos">
+                    <div class="ligne_pointille"></div>
+                    <a href="https://wordpress.org/" target="_blank"><img id="wordpress_logo" class="logos_langages" src="<?php echo asset('images/wordpress.webp'); ?>" alt="Logo du CMS (content management system) WordPress." height="65px" loading="lazy" title="WordPress"></a>
+                </div>
             </div>
 
-            <h3 id="outils_creatifs" class="sous_titre sous_titre_competences texte_dark_mode">Outils créatifs</h3>
-            <div class="container_ligne_pointille_et_logos">
-                <div class="ligne_pointille"></div>
-                <img id="photoshop" class="logos_langages" src="<?php echo asset('images/adobe_photoshop.webp'); ?>" alt="Logo de l’application de retouche photo et design Photoshop." height="65px" loading="lazy" title="Photoshop">
-                <img id="illustrator" class="logos_langages" src="<?php echo asset('images/adobe_illustrator.webp'); ?>" alt="Logo du logiciel de création graphique vectorielle Illustrator." height="65px" loading="lazy" title="Illustrator">
-                <img id="indesign" class="logos_langages" src="<?php echo asset('images/adobe_indesign.webp'); ?>" alt="Logo de l'application de mise en page et PAO InDesign." height="65px" loading="lazy" title="InDesign">
-                <img id="figma" class="logos_langages" src="<?php echo asset('images/figma.webp'); ?>" alt="Logo de l'éditeur de graphiques vectoriels et outil de prototypage Figma." height="65px" loading="lazy" title="Figma">
-            </div>
-            <div id="cta_compétences">
-                <button class="cta">Me contacter</button>
+            <div class="each_competence">
+                <h3 id="outils_creatifs" class="sous_titre sous_titre_competences texte_dark_mode">Outils créatifs</h3>
+                <div class="container_ligne_pointille_et_logos">
+                    <div class="ligne_pointille"></div>
+                    <img id="photoshop" class="logos_langages" src="<?php echo asset('images/adobe_photoshop.webp'); ?>" alt="Logo de l’application de retouche photo et design Photoshop." height="65px" loading="lazy" title="Photoshop">
+                    <img id="illustrator" class="logos_langages" src="<?php echo asset('images/adobe_illustrator.webp'); ?>" alt="Logo du logiciel de création graphique vectorielle Illustrator." height="65px" loading="lazy" title="Illustrator">
+                    <img id="indesign" class="logos_langages" src="<?php echo asset('images/adobe_indesign.webp'); ?>" alt="Logo de l'application de mise en page et PAO InDesign." height="65px" loading="lazy" title="InDesign">
+                    <img id="figma" class="logos_langages" src="<?php echo asset('images/figma.webp'); ?>" alt="Logo de l'éditeur de graphiques vectoriels et outil de prototypage Figma." height="65px" loading="lazy" title="Figma">
+                </div>
             </div>
 
+            <!-- <div class="cta_competences"> -->
+                <a href="<?php echo BASE_PATH; ?>/contact.php" class="cta">Me contacter</a>
+            <!-- </div> -->
         </div>
 
 

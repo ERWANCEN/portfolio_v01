@@ -62,6 +62,7 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tableau de bord - Administration</title>
     <link rel="stylesheet" href="<?= BASE_PATH ?>/assets/css/style.css">
+    <link rel="stylesheet" href="<?= BASE_PATH ?>/assets/css/admin.css">
 </head>
 <body>
     <div id="container_general">
@@ -69,19 +70,19 @@ try {
         
         <main>
             <div class="admin-container">
-                <h1 class="titre_principal">Tableau de bord</h1>
+                <h1 class="titre_principal texte_dark_mode">Tableau de bord</h1>
                 
                 <div class="dashboard-stats">
                     <div class="stat-card">
-                        <h3>Messages</h3>
+                        <h3 class="texte_dark_mode">Messages</h3>
                         <p class="stat-number"><?= $messagesCount ?></p>
-                        <a href="<?= BASE_PATH ?>/admin/contacts/index.php" class="stat-link">Voir tous les messages</a>
+                        <a href="<?= BASE_PATH ?>/admin/contacts/index.php" class="btn-restore">Voir tous les messages</a>
                     </div>
                     
                     <div class="stat-card">
-                        <h3>Projets</h3>
+                        <h3 class="texte_dark_mode">Projets</h3>
                         <p class="stat-number"><?= $projetsCount ?></p>
-                        <a href="<?= BASE_PATH ?>/admin/projets/list.php" class="stat-link">Gérer les projets</a>
+                        <a href="<?= BASE_PATH ?>/admin/projets/list.php" class="btn-restore">Gérer les projets</a>
                     </div>
                 </div>
             </div>

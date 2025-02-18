@@ -7,6 +7,11 @@ RewriteCond %{REQUEST_FILENAME} !-d
 # Masquer les extensions de fichiers
 RewriteBase /
 
+# Règle générique pour supprimer l'extension .php
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^([^/]+)/?$ $1.php [L,QSA]
+
 # URLs propres pour les pages principales
 RewriteRule ^projets/?$ projets.php [L,QSA]
 RewriteRule ^contact/?$ contact.php [L,QSA]

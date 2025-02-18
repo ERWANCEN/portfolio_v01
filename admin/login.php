@@ -67,35 +67,38 @@ $pageTitle = 'Administration - Connexion';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $pageTitle ?></title>
     <link rel="stylesheet" href="<?= BASE_PATH ?>/assets/css/style.css">
+    <link rel="stylesheet" href="<?= BASE_PATH ?>/assets/css/admin.css">
 </head>
 <body>
     <div id="container_general">
         <?php include __DIR__ . '/../config/inc/header.inc.php'; ?>
 
         <main>
-            <section id="container_contact">
-                <h1 id="titre_contact" class="titre_principal texte_dark_mode">Administration</h1>
-                
-                <form class="formulaire_de_contact" method="POST" action="">
+            <div class="admin-container">
+                <div class="login-form">
+                    <h1 class="titre_principal texte_dark_mode">Administration</h1>
+                    
                     <?php if ($error): ?>
                         <div class="error-message"><?= escapeHtml($error) ?></div>
                     <?php endif; ?>
 
-                    <input type="hidden" name="csrf_token" value="<?= escapeAttr($_SESSION['csrf_token']) ?>">
-                    
-                    <div class="form-group">
-                        <label for="nom">Identifiant</label>
-                        <input type="text" id="nom" name="nom" required>
-                    </div>
+                    <form method="POST" action="">
+                        <input type="hidden" name="csrf_token" value="<?= escapeAttr($_SESSION['csrf_token']) ?>">
+                        
+                        <div class="form-group">
+                            <label for="nom">Identifiant</label>
+                            <input type="text" id="nom" name="nom" required>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="password">Mot de passe</label>
-                        <input type="password" id="password" name="password" required>
-                    </div>
+                        <div class="form-group">
+                            <label for="password">Mot de passe</label>
+                            <input type="password" id="password" name="password" required>
+                        </div>
 
-                    <button type="submit" class="cta">Se connecter</button>
-                </form>
-            </section>
+                        <button type="submit" class="btn-restore">Se connecter</button>
+                    </form>
+                </div>
+            </div>
         </main>
 
         <?php include __DIR__ . '/../config/inc/footer.inc.php'; ?>

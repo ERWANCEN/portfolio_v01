@@ -30,6 +30,7 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $pageTitle ?></title>
     <link rel="stylesheet" href="<?= BASE_PATH ?>/assets/css/style.css">
+    <link rel="stylesheet" href="<?= BASE_PATH ?>/assets/css/admin.css">
 </head>
 <body>
     <div id="container_general">
@@ -37,7 +38,7 @@ try {
         
         <main>
             <div class="admin-container">
-                <h1 class="titre_principal">Projets</h1>
+                <h1 class="titre_principal texte_dark_mode">Projets</h1>
 
                 <?php if (isset($_GET['success'])): ?>
                     <div class="success-message">
@@ -52,34 +53,42 @@ try {
                 <?php endif; ?>
 
                 <div class="admin-actions">
-                    <a href="<?= BASE_PATH ?>/admin/projets/create.php" class="btn-reply">Ajouter un projet</a>
+                    <a href="<?= BASE_PATH ?>/admin/projets/create.php" class="btn-restore">Ajouter un projet</a>
                 </div>
 
                 <?php if (empty($projets)): ?>
-                    <p class="no-messages">Aucun projet</p>
+                    <p class="no-messages texte_dark_mode">Aucun projet</p>
                 <?php else: ?>
-                    <div class="messages-list">
-                        <?php foreach ($projets as $projet): ?>
-                            <div class="message-item">
-                                <div class="message-header">
-                                    <div class="message-info">
-                                        <strong><?= htmlspecialchars($projet['titre']) ?></strong>
-                                        <span>Créé le <?= (new DateTime($projet['date_creation']))->format('d/m/Y H:i') ?></span>
-                                    </div>
-                                    <div class="message-actions">
-                                        <a href="<?= BASE_PATH ?>/admin/projets/edit.php?id=<?= $projet['id_projet'] ?>" class="btn-reply">Modifier</a>
-                                        <a href="<?= BASE_PATH ?>/admin/projets/delete.php?id=<?= $projet['id_projet'] ?>" class="btn-delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce projet ?')">Supprimer</a>
-                                    </div>
-                                </div>
-                                <?php if (!empty($projet['image_principale'])): ?>
-                                <div class="project-preview">
-                                    <img src="<?= BASE_PATH ?>/assets/images/<?= htmlspecialchars($projet['image_principale']) ?>" 
-                                         alt="Aperçu de <?= htmlspecialchars($projet['titre']) ?>"
-                                         class="preview-image">
-                                </div>
-                                <?php endif; ?>
-                            </div>
-                        <?php endforeach; ?>
+                    <div class="table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Titre</th>
+                                    <th>Date de création</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($projets as $projet): ?>
+                                    <tr>
+                                        <td class="project-image">
+                                            <?php if (!empty($projet['image_principale'])): ?>
+                                                <img src="<?= BASE_PATH ?>/assets/images/<?= htmlspecialchars($projet['image_principale']) ?>" 
+                                                     alt="Aperçu de <?= htmlspecialchars($projet['titre']) ?>"
+                                                     class="preview-image">
+                                            <?php endif; ?>
+                                        </td>
+                                        <td><?= htmlspecialchars($projet['titre']) ?></td>
+                                        <td><?= (new DateTime($projet['date_creation']))->format('d/m/Y H:i') ?></td>
+                                        <td class="actions">
+                                            <a href="<?= BASE_PATH ?>/admin/projets/edit.php?id=<?= $projet['id_projet'] ?>" class="btn-restore">Modifier</a>
+                                            <a href="<?= BASE_PATH ?>/admin/projets/delete.php?id=<?= $projet['id_projet'] ?>" class="btn-delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce projet ?')">Supprimer</a>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
                     </div>
                 <?php endif; ?>
             </div>

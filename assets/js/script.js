@@ -1,9 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Mode jour/nuit
     const body = document.querySelector('body');
-    const modeJourNuitContainer = document.querySelector('.mode_jour_nuit_container');
-    const soleil = document.querySelector('.mode_jour_nuit.soleil');
-    const lune = document.querySelector('.mode_jour_nuit.lune');
+    const modeJourNuitContainers = document.querySelectorAll('.mode_jour_nuit_container');
     const logosJour = document.querySelectorAll('.logo_nav_mode_jour');
     const logosNuit = document.querySelectorAll('.logo_nav_mode_nuit');
 
@@ -32,29 +30,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Fonction pour mettre à jour le mode sombre
     function updateDarkMode(isDark) {
-        // Mise à jour des classes
         if (isDark) {
             body.classList.add('dark');
-            if (soleil) soleil.classList.remove('visible');
-            if (lune) lune.classList.add('visible');
         } else {
             body.classList.remove('dark');
-            if (soleil) soleil.classList.add('visible');
-            if (lune) lune.classList.remove('visible');
         }
 
         // Mise à jour des logos
-        if (logosJour) {
-            logosJour.forEach(logo => {
-                logo.classList.toggle('logo_visible', !isDark);
-            });
-        }
-
-        if (logosNuit) {
-            logosNuit.forEach(logo => {
-                logo.classList.toggle('logo_visible', isDark);
-            });
-        }
+        logosJour.forEach(logo => {
+            logo.classList.toggle('logo_visible', !isDark);
+        });
+        logosNuit.forEach(logo => {
+            logo.classList.toggle('logo_visible', isDark);
+        });
 
         // Sauvegarder la préférence
         setCookie('darkMode', isDark, 365);
@@ -64,15 +52,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const darkMode = getCookie('darkMode') === 'true';
     updateDarkMode(darkMode);
 
-    // Vérifier si les éléments du mode jour/nuit existent et ajouter l'écouteur d'événements
-    if (modeJourNuitContainer) {
-        modeJourNuitContainer.addEventListener('click', () => {
+    // Ajouter les écouteurs d'événements pour le bouton mode jour/nuit
+    modeJourNuitContainers.forEach(container => {
+        const button = container.querySelector('.mode_jour_nuit');
+        button.addEventListener('click', () => {
             const isDark = !body.classList.contains('dark');
             updateDarkMode(isDark);
         });
-    }
+    });
 
-    // Menu Mobile
+    // Mobile Menu
     const burgerCheckbox = document.querySelector('#burger');
     const menuLinks = document.querySelectorAll('.mobile_nav a');
 
@@ -92,6 +81,28 @@ document.addEventListener('DOMContentLoaded', function() {
             link.addEventListener('click', () => {
                 burgerCheckbox.checked = false;
                 toggleMenu(); // Ferme le menu quand un lien est cliqué
+            });
+        });
+    }
+
+    // Menu mobile
+    const menuBurger = document.querySelector('.menu_burger');
+    const menuMobile = document.querySelector('.menu_mobile');
+    
+    if (menuBurger && menuMobile) {
+        menuBurger.addEventListener('click', function() {
+            this.classList.toggle('active');
+            menuMobile.classList.toggle('active');
+            document.body.style.overflow = menuMobile.classList.contains('active') ? 'hidden' : '';
+        });
+
+        // Close menu when clicking on a link
+        const menuLinks = menuMobile.querySelectorAll('a');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                menuBurger.classList.remove('active');
+                menuMobile.classList.remove('active');
+                document.body.style.overflow = '';
             });
         });
     }
