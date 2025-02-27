@@ -7,16 +7,20 @@ use Config\Database;
 
 requireAdmin();
 
-$pageTitle = 'Liste des projets';
+// Détermine si on affiche la corbeille
+$showTrash = isset($_GET['trash']) && $_GET['trash'] === '1';
+
+$pageTitle = $showTrash ? 'Corbeille - Projets' : 'Liste des projets';
 $pdo = Database::getConnection();
 
 // Récupération des projets
 try {
     $query = 'SELECT id_projet, titre, date_creation, image_principale 
               FROM projet_template 
+              WHERE supprime = :supprime
               ORDER BY date_creation DESC';
     $stmt = $pdo->prepare($query);
-    $stmt->execute();
+    $stmt->execute(['supprime' => $showTrash ? 1 : 0]);
     $projets = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (Exception $e) {
     error_log("Erreur lors de la récupération des projets : " . $e->getMessage());
@@ -38,11 +42,15 @@ try {
         
         <main>
             <div class="admin-container">
-                <h1 class="titre_principal texte_dark_mode">Projets</h1>
+                <h1 class="titre_principal texte_dark_mode"><?= $showTrash ? 'Corbeille - Projets' : 'Projets' ?></h1>
 
                 <?php if (isset($_GET['success'])): ?>
                     <div class="success-message">
-                        Le projet a été supprimé avec succès.
+                        <?php if ($showTrash): ?>
+                            <?= isset($_GET['restored']) ? 'Le projet a été restauré avec succès.' : 'Le projet a été supprimé définitivement avec succès.' ?>
+                        <?php else: ?>
+                            Le projet a été déplacé vers la corbeille.
+                        <?php endif; ?>
                     </div>
                 <?php endif; ?>
 
@@ -53,11 +61,16 @@ try {
                 <?php endif; ?>
 
                 <div class="admin-actions">
-                    <a href="<?= BASE_PATH ?>/admin/projets/create.php" class="btn-restore">Ajouter un projet</a>
+                    <?php if ($showTrash): ?>
+                        <a href="<?= BASE_PATH ?>/admin/projets/list.php" class="btn-restore">Retour aux projets</a>
+                    <?php else: ?>
+                        <a href="<?= BASE_PATH ?>/admin/projets/create.php" class="btn-restore">Ajouter un projet</a>
+                        <a href="<?= BASE_PATH ?>/admin/projets/list.php?trash=1" class="btn-delete">Voir la corbeille</a>
+                    <?php endif; ?>
                 </div>
 
                 <?php if (empty($projets)): ?>
-                    <p class="no-messages texte_dark_mode">Aucun projet</p>
+                    <p class="no-messages texte_dark_mode">Aucun projet <?= $showTrash ? 'dans la corbeille' : '' ?></p>
                 <?php else: ?>
                     <div class="table-container">
                         <table class="admin-table">
@@ -82,8 +95,13 @@ try {
                                         <td><?= htmlspecialchars($projet['titre']) ?></td>
                                         <td><?= (new DateTime($projet['date_creation']))->format('d/m/Y H:i') ?></td>
                                         <td class="actions">
-                                            <a href="<?= BASE_PATH ?>/admin/projets/edit.php?id=<?= $projet['id_projet'] ?>" class="btn-restore">Modifier</a>
-                                            <a href="<?= BASE_PATH ?>/admin/projets/delete.php?id=<?= $projet['id_projet'] ?>" class="btn-delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce projet ?')">Supprimer</a>
+                                            <?php if ($showTrash): ?>
+                                                <a href="<?= BASE_PATH ?>/admin/projets/restore.php?id=<?= $projet['id_projet'] ?>" class="btn-restore">Restaurer</a>
+                                                <a href="<?= BASE_PATH ?>/admin/projets/delete.php?id=<?= $projet['id_projet'] ?>" class="btn-delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer définitivement ce projet ?')">Supprimer définitivement</a>
+                                            <?php else: ?>
+                                                <a href="<?= BASE_PATH ?>/admin/projets/edit.php?id=<?= $projet['id_projet'] ?>" class="btn-restore">Modifier</a>
+                                                <a href="<?= BASE_PATH ?>/admin/projets/move-to-trash.php?id=<?= $projet['id_projet'] ?>" class="btn-delete" onclick="return confirm('Êtes-vous sûr de vouloir déplacer ce projet vers la corbeille ?')">Supprimer</a>
+                                            <?php endif; ?>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

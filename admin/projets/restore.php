@@ -1,5 +1,4 @@
 <?php
-
 require_once __DIR__ . '/../../config/paths.php';
 require_once __DIR__ . '/../../autoload.php';
 require_once __DIR__ . '/../auth.php';
@@ -14,4 +13,4 @@ if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
 }
 
 $controller = new ProjectController();
-$controller->deleteProject($_GET['id']);
+$controller->restoreFromTrash($_GET['id']);
