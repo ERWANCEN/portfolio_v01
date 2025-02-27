@@ -99,7 +99,7 @@ try {
                                                 <a href="<?= BASE_PATH ?>/admin/contacts/delete.php?id=<?= $message['id'] ?>" class="btn-delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer définitivement ce message ?')">Supprimer définitivement</a>
                                             <?php else: ?>
                                                 <a href="mailto:<?= htmlspecialchars($message['email']) ?>" class="btn-restore">Répondre</a>
-                                                <a href="<?= BASE_PATH ?>/admin/contacts/delete.php?id=<?= $message['id'] ?>" class="btn-delete">Supprimer</a>
+                                                <a href="<?= BASE_PATH ?>/admin/contacts/move-to-trash.php?id=<?= $message['id'] ?>" class="btn-delete" onclick="return confirm('Êtes-vous sûr de vouloir déplacer ce message vers la corbeille ?')">Supprimer</a>
                                             <?php endif; ?>
                                         </td>
                                     </tr>
