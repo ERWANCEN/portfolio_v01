@@ -49,7 +49,13 @@ try {
                         <?php if ($showTrash): ?>
                             <?= isset($_GET['restored']) ? 'Le projet a été restauré avec succès.' : 'Le projet a été supprimé définitivement avec succès.' ?>
                         <?php else: ?>
-                            Le projet a été déplacé vers la corbeille.
+                            <?php if (isset($_GET['created'])): ?>
+                                Le projet a été créé avec succès.
+                            <?php elseif (isset($_GET['edited'])): ?>
+                                Le projet a été modifié avec succès.
+                            <?php else: ?>
+                                Le projet a été déplacé vers la corbeille.
+                            <?php endif; ?>
                         <?php endif; ?>
                     </div>
                 <?php endif; ?>

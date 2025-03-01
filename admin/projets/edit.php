@@ -42,87 +42,94 @@ try {
         $stmt = $pdo->prepare('UPDATE projet_template SET titre = ?, texte_contexte = ?, texte_details = ? WHERE id_projet = ?');
         $stmt->execute([$titre, $texte_contexte, $texte_details, $id_projet]);
 
+        // Gestion de l'image principale si une nouvelle est uploadée
+        if (isset($_FILES['image_principale']) && $_FILES['image_principale']['error'] === UPLOAD_ERR_OK) {
+            $uploadDir = __DIR__ . '/../../assets/images/';
+            $filename = basename($_FILES['image_principale']['name']);
+            $uploadFile = $uploadDir . $filename;
+            
+            if (move_uploaded_file($_FILES['image_principale']['tmp_name'], $uploadFile)) {
+                $stmt = $pdo->prepare('UPDATE projet_template SET image_principale = ? WHERE id_projet = ?');
+                $stmt->execute([$filename, $id_projet]);
+            }
+        }
+
         // Mise à jour des étapes
         if (isset($_POST['etapes']) && is_array($_POST['etapes'])) {
-            foreach ($_POST['etapes'] as $id_etape => $etape) {
-                if (!empty($etape['titre']) && !empty($etape['description'])) {
-                    if ($id_etape === 'new') {
-                        // Nouvelle étape
-                        $stmt = $pdo->prepare('INSERT INTO etapes_projet (id_projet, description) VALUES (?, ?)');
-                        $stmt->execute([$id_projet, $etape['description']]);
-                    } else {
-                        // Mise à jour d'une étape existante
-                        $stmt = $pdo->prepare('UPDATE etapes_projet SET description = ? WHERE id_etape = ? AND id_projet = ?');
-                        $stmt->execute([$etape['description'], $id_etape, $id_projet]);
+            // Supprimer les anciennes étapes
+            $stmt = $pdo->prepare('DELETE FROM etapes_projet WHERE id_projet = ?');
+            $stmt->execute([$id_projet]);
+            
+            // Ajouter les nouvelles étapes
+            $queryEtape = "INSERT INTO etapes_projet (id_projet, description) VALUES (:id_projet, :description)";
+            $stmtEtape = $pdo->prepare($queryEtape);
+            
+            foreach ($_POST['etapes'] as $description) {
+                if (!empty(trim($description))) {
+                    $stmtEtape->execute([
+                        'id_projet' => $id_projet,
+                        'description' => $description
+                    ]);
+                }
+            }
+        }
+
+        // Mise à jour des images de contexte
+        if (isset($_FILES['images_contexte']) && isset($_POST['titres_contexte']) && isset($_POST['textes_contexte'])) {
+            // Supprimer les anciennes images de contexte
+            $stmt = $pdo->prepare('DELETE FROM images_contexte WHERE id_projet = ?');
+            $stmt->execute([$id_projet]);
+            
+            $queryImage = "INSERT INTO images_contexte (id_projet, image, titre_contexte, texte_contexte) 
+                          VALUES (:id_projet, :image, :titre_contexte, :texte_contexte)";
+            $stmtImage = $pdo->prepare($queryImage);
+            
+            foreach ($_FILES['images_contexte']['tmp_name'] as $key => $tmp_name) {
+                if ($_FILES['images_contexte']['error'][$key] === UPLOAD_ERR_OK) {
+                    $filename = basename($_FILES['images_contexte']['name'][$key]);
+                    $uploadFile = $uploadDir . $filename;
+                    
+                    if (move_uploaded_file($tmp_name, $uploadFile)) {
+                        $stmtImage->execute([
+                            'id_projet' => $id_projet,
+                            'image' => $filename,
+                            'titre_contexte' => $_POST['titres_contexte'][$key],
+                            'texte_contexte' => $_POST['textes_contexte'][$key]
+                        ]);
                     }
                 }
             }
         }
 
         // Mise à jour des outils
-        if (isset($_POST['outils']) && is_array($_POST['outils'])) {
-            foreach ($_POST['outils'] as $id_outil => $outil) {
-                if (!empty($outil['nom'])) {
-                    if ($id_outil === 'new') {
-                        // Nouvel outil
-                        $stmt = $pdo->prepare('INSERT INTO outils_utilises (id_projet, nom_outil, image_outil) VALUES (?, ?, ?)');
-                        $stmt->execute([$id_projet, $outil['nom'], $outil['image'] ?? null]);
-                    } else {
-                        // Mise à jour d'un outil existant
-                        $stmt = $pdo->prepare('UPDATE outils_utilises SET nom_outil = ?, image_outil = ? WHERE id_outil = ? AND id_projet = ?');
-                        $stmt->execute([$outil['nom'], $outil['image'] ?? null, $id_outil, $id_projet]);
-                    }
-                }
-            }
-        }
-
-        // Gestion des images
-        if (isset($_FILES['images']) && is_array($_FILES['images']['name'])) {
-            $uploadDir = __DIR__ . '/../../assets/images/';
+        if (isset($_FILES['images_outil']) && isset($_POST['noms_outil'])) {
+            // Supprimer les anciens outils
+            $stmt = $pdo->prepare('DELETE FROM outils_utilises WHERE id_projet = ?');
+            $stmt->execute([$id_projet]);
             
-            foreach ($_FILES['images']['name'] as $key => $name) {
-                if ($_FILES['images']['error'][$key] === UPLOAD_ERR_OK) {
-                    $tmpName = $_FILES['images']['tmp_name'][$key];
-                    $fileName = uniqid() . '_' . securePath($name);
-                    $titre = $_POST['images_titre'][$key] ?? '';
-                    $texte = $_POST['images_texte'][$key] ?? '';
-
-                    if (move_uploaded_file($tmpName, $uploadDir . $fileName)) {
-                        $stmt = $pdo->prepare('INSERT INTO images_contexte (id_projet, image, titre_contexte, texte_contexte) VALUES (?, ?, ?, ?)');
-                        $stmt->execute([$id_projet, $fileName, $titre, $texte]);
+            $queryOutil = "INSERT INTO outils_utilises (id_projet, image_outil, nom_outil) 
+                          VALUES (:id_projet, :image_outil, :nom_outil)";
+            $stmtOutil = $pdo->prepare($queryOutil);
+            
+            foreach ($_FILES['images_outil']['tmp_name'] as $key => $tmp_name) {
+                if ($_FILES['images_outil']['error'][$key] === UPLOAD_ERR_OK) {
+                    $filename = basename($_FILES['images_outil']['name'][$key]);
+                    $uploadFile = $uploadDir . $filename;
+                    
+                    if (move_uploaded_file($tmp_name, $uploadFile)) {
+                        $stmtOutil->execute([
+                            'id_projet' => $id_projet,
+                            'image_outil' => $filename,
+                            'nom_outil' => $_POST['noms_outil'][$key]
+                        ]);
                     }
-                }
-            }
-        }
-
-        // Suppression des éléments marqués
-        if (!empty($_POST['delete'])) {
-            foreach ($_POST['delete'] as $type => $ids) {
-                foreach ($ids as $id) {
-                    switch ($type) {
-                        case 'etapes':
-                            $stmt = $pdo->prepare('DELETE FROM etapes_projet WHERE id_etape = ? AND id_projet = ?');
-                            break;
-                        case 'outils':
-                            $stmt = $pdo->prepare('DELETE FROM outils_utilises WHERE id_outil = ? AND id_projet = ?');
-                            break;
-                        case 'images':
-                            // Récupérer le nom du fichier avant la suppression
-                            $stmt = $pdo->prepare('SELECT image FROM images_contexte WHERE id_image = ? AND id_projet = ?');
-                            $stmt->execute([$id, $id_projet]);
-                            if ($image = $stmt->fetch()) {
-                                unlink($uploadDir . $image['image']);
-                            }
-                            $stmt = $pdo->prepare('DELETE FROM images_contexte WHERE id_image = ? AND id_projet = ?');
-                            break;
-                    }
-                    $stmt->execute([$id, $id_projet]);
                 }
             }
         }
 
         $pdo->commit();
-        $success = 'Projet mis à jour avec succès';
+        header('Location: ' . BASE_PATH . '/admin/projets/list.php?success=1&edited=1');
+        exit();
     }
 
     // Récupération des données du projet et de ses éléments
@@ -156,188 +163,140 @@ try {
 
 // Génération d'un nouveau token CSRF
 $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-
-include __DIR__ . '/../../config/inc/head.inc.php';
 ?>
-<title>Modifier le projet - Administration</title>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifier le projet - Administration</title>
+    <link rel="stylesheet" href="<?= BASE_PATH ?>/assets/css/style.css">
+    <link rel="stylesheet" href="<?= BASE_PATH ?>/assets/css/admin.css">
+    <style>
+        .dynamic-form-group { margin-bottom: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        .dynamic-form-group .form-group { margin-bottom: 10px; }
+        .remove-item { cursor: pointer; }
+        .add-item { margin-top: 10px; }
+        .current-image { max-width: 200px; margin: 10px 0; }
+    </style>
 </head>
 <body>
     <div id="container_general">
         <?php include __DIR__ . '/../../config/inc/admin_header.inc.php'; ?>
-
+        
         <main>
             <div class="admin-container">
                 <h1 class="titre_principal texte_dark_mode">Modifier le projet</h1>
-                
-                <?php if ($error): ?>
-                    <div class="error-message"><?= escapeHtml($error) ?></div>
+
+                <?php if (!empty($error)): ?>
+                    <div class="error-message"><?= htmlspecialchars($error) ?></div>
                 <?php endif; ?>
 
-                <?php if ($success): ?>
-                    <div class="success-message"><?= escapeHtml($success) ?></div>
-                <?php endif; ?>
+                <form action="" method="post" enctype="multipart/form-data" class="admin-form">
+                    <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
 
-                <form method="POST" action="" class="edit-form" enctype="multipart/form-data">
-                    <input type="hidden" name="csrf_token" value="<?= escapeAttr($_SESSION['csrf_token']) ?>">
-
-                    <!-- Informations du projet -->
-                    <section class="form-section">
-                        <h2 class="texte_dark_mode">Informations du projet</h2>
-                        
+                    <!-- Informations principales -->
+                    <div class="form-section">
+                        <h2>Informations principales</h2>
                         <div class="form-group">
-                            <label for="titre" class="texte_dark_mode">Titre</label>
+                            <label for="titre">Titre du projet</label>
                             <input type="text" id="titre" name="titre" required 
-                                   value="<?= escapeAttr($projet['titre']) ?>"
-                                   class="input_form texte_dark_mode">
+                                   value="<?= htmlspecialchars($projet['titre']) ?>">
                         </div>
 
                         <div class="form-group">
-                            <label for="texte_contexte" class="texte_dark_mode">Texte de contexte</label>
-                            <textarea id="texte_contexte" name="texte_contexte" required 
-                                      class="input_form texte_dark_mode"><?= escapeHtml($projet['texte_contexte']) ?></textarea>
+                            <label for="texte_contexte">Contexte</label>
+                            <textarea id="texte_contexte" name="texte_contexte" required rows="4"><?= htmlspecialchars($projet['texte_contexte']) ?></textarea>
                         </div>
 
                         <div class="form-group">
-                            <label for="texte_details" class="texte_dark_mode">Texte de détails</label>
-                            <textarea id="texte_details" name="texte_details" required 
-                                      class="input_form texte_dark_mode"><?= escapeHtml($projet['texte_details']) ?></textarea>
+                            <label for="texte_details">Détails</label>
+                            <textarea id="texte_details" name="texte_details" required rows="8"><?= htmlspecialchars($projet['texte_details']) ?></textarea>
                         </div>
-                    </section>
 
-                    <!-- Étapes -->
-                    <section class="form-section">
-                        <h2 class="texte_dark_mode">Étapes du projet</h2>
+                        <div class="form-group">
+                            <?php if (!empty($projet['image_principale'])): ?>
+                                <p>Image principale actuelle :</p>
+                                <img src="<?= BASE_PATH ?>/assets/images/<?= htmlspecialchars($projet['image_principale']) ?>" 
+                                     alt="Image principale actuelle" class="current-image">
+                            <?php endif; ?>
+                            <label for="image_principale">Nouvelle image principale (laisser vide pour conserver l'actuelle)</label>
+                            <input type="file" id="image_principale" name="image_principale" accept="image/*">
+                        </div>
+                    </div>
+
+                    <!-- Étapes du projet -->
+                    <div class="form-section">
+                        <h2>Étapes du projet</h2>
                         <div id="etapes-container">
                             <?php foreach ($etapes as $etape): ?>
-                                <div class="etape-item">
+                                <div class="dynamic-form-group">
                                     <div class="form-group">
-                                        <label class="texte_dark_mode">Titre de l'étape</label>
-                                        <input type="text" name="etapes[<?= $etape['id_etape'] ?>][titre]" 
-                                               value="<?= escapeAttr($etape['titre']) ?>"
-                                               class="input_form texte_dark_mode">
+                                        <label>Description de l'étape</label>
+                                        <textarea name="etapes[]" rows="3" required><?= htmlspecialchars($etape['description']) ?></textarea>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="texte_dark_mode">Description de l'étape</label>
-                                        <textarea name="etapes[<?= $etape['id_etape'] ?>][description]" 
-                                                  class="input_form texte_dark_mode"><?= escapeHtml($etape['description']) ?></textarea>
-                                    </div>
-                                    <div class="delete-checkbox">
-                                        <label>
-                                            <input type="checkbox" name="delete[etapes][]" value="<?= $etape['id_etape'] ?>">
-                                            Supprimer cette étape
-                                        </label>
-                                    </div>
+                                    <button type="button" class="btn-delete remove-item" onclick="this.closest('.dynamic-form-group').remove()">Supprimer</button>
                                 </div>
                             <?php endforeach; ?>
-                            <!-- Template pour nouvelle étape -->
-                            <div class="etape-item new-item">
-                                <div class="form-group">
-                                    <label class="texte_dark_mode">Nouvelle étape</label>
-                                    <input type="text" name="etapes[new][titre]" placeholder="Titre" 
-                                           class="input_form texte_dark_mode">
-                                    <textarea name="etapes[new][description]" placeholder="Description" 
-                                              class="input_form texte_dark_mode"></textarea>
-                                </div>
-                            </div>
                         </div>
-                    </section>
+                        <button type="button" class="btn-restore add-item" onclick="addEtape()">Ajouter une étape</button>
+                    </div>
 
-                    <!-- Outils -->
-                    <section class="form-section">
-                        <h2 class="texte_dark_mode">Outils utilisés</h2>
+                    <!-- Images de contexte -->
+                    <div class="form-section">
+                        <h2>Images de contexte</h2>
+                        <div id="images-contexte-container">
+                            <?php foreach ($images as $image): ?>
+                                <div class="dynamic-form-group">
+                                    <img src="<?= BASE_PATH ?>/assets/images/<?= htmlspecialchars($image['image']) ?>" 
+                                         alt="Image de contexte" class="current-image">
+                                    <div class="form-group">
+                                        <label>Image</label>
+                                        <input type="file" name="images_contexte[]" accept="image/*">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Titre du contexte</label>
+                                        <input type="text" name="titres_contexte[]" required value="<?= htmlspecialchars($image['titre_contexte']) ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Texte du contexte</label>
+                                        <textarea name="textes_contexte[]" rows="3" required><?= htmlspecialchars($image['texte_contexte']) ?></textarea>
+                                    </div>
+                                    <button type="button" class="btn-delete remove-item" onclick="this.closest('.dynamic-form-group').remove()">Supprimer</button>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                        <button type="button" class="btn-restore add-item" onclick="addImageContexte()">Ajouter une image de contexte</button>
+                    </div>
+
+                    <!-- Outils utilisés -->
+                    <div class="form-section">
+                        <h2>Outils utilisés</h2>
                         <div id="outils-container">
                             <?php foreach ($outils as $outil): ?>
-                                <div class="outil-item">
+                                <div class="dynamic-form-group">
+                                    <?php if (!empty($outil['image_outil'])): ?>
+                                        <img src="<?= BASE_PATH ?>/assets/images/<?= htmlspecialchars($outil['image_outil']) ?>" 
+                                             alt="Image de l'outil" class="current-image">
+                                    <?php endif; ?>
                                     <div class="form-group">
-                                        <label class="texte_dark_mode">Nom de l'outil</label>
-                                        <input type="text" name="outils[<?= $outil['id_outil'] ?>][nom]" 
-                                               value="<?= escapeAttr($outil['nom_outil']) ?>"
-                                               class="input_form texte_dark_mode">
+                                        <label>Image de l'outil</label>
+                                        <input type="file" name="images_outil[]" accept="image/*">
                                     </div>
                                     <div class="form-group">
-                                        <label class="texte_dark_mode">Image de l'outil</label>
-                                        <div class="file-upload">
-                                            <button type="button" class="file-upload-button">Choisir un fichier</button>
-                                            <span class="file-upload-label">Aucun fichier choisi</span>
-                                            <input type="file" name="outils[<?= $outil['id_outil'] ?>][image]" 
-                                                   class="input_form texte_dark_mode">
-                                        </div>
+                                        <label>Nom de l'outil</label>
+                                        <input type="text" name="noms_outil[]" required value="<?= htmlspecialchars($outil['nom_outil']) ?>">
                                     </div>
-                                    <div class="delete-checkbox">
-                                        <label>
-                                            <input type="checkbox" name="delete[outils][]" value="<?= $outil['id_outil'] ?>">
-                                            Supprimer cet outil
-                                        </label>
-                                    </div>
+                                    <button type="button" class="btn-delete remove-item" onclick="this.closest('.dynamic-form-group').remove()">Supprimer</button>
                                 </div>
                             <?php endforeach; ?>
-                            <!-- Template pour nouvel outil -->
-                            <div class="outil-item new-item">
-                                <div class="form-group">
-                                    <label class="texte_dark_mode">Nouvel outil</label>
-                                    <input type="text" name="outils[new][nom]" placeholder="Nom de l'outil" 
-                                           class="input_form texte_dark_mode">
-                                    <div class="file-upload">
-                                        <button type="button" class="file-upload-button">Choisir un fichier</button>
-                                        <span class="file-upload-label">Aucun fichier choisi</span>
-                                        <input type="file" name="outils[new][image]" 
-                                               class="input_form texte_dark_mode">
-                                    </div>
-                                </div>
-                            </div>
                         </div>
-                    </section>
-
-                    <!-- Images -->
-                    <section class="form-section">
-                        <h2 class="texte_dark_mode">Images du projet</h2>
-                        <div id="images-container">
-                            <?php foreach ($images as $image): ?>
-                                <div class="image-item">
-                                    <img src="<?= BASE_PATH ?>/assets/images/<?= escapeAttr($image['image']) ?>" 
-                                         alt="<?= escapeAttr($image['titre_contexte']) ?>" 
-                                         class="preview-image">
-                                    <div class="form-group">
-                                        <label class="texte_dark_mode">Titre de l'image</label>
-                                        <input type="text" name="images[<?= $image['id_image'] ?>][titre]" 
-                                               value="<?= escapeAttr($image['titre_contexte']) ?>"
-                                               class="input_form texte_dark_mode">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="texte_dark_mode">Texte de l'image</label>
-                                        <textarea name="images[<?= $image['id_image'] ?>][texte]" 
-                                                  class="input_form texte_dark_mode"><?= escapeHtml($image['texte_contexte']) ?></textarea>
-                                    </div>
-                                    <div class="delete-checkbox">
-                                        <label>
-                                            <input type="checkbox" name="delete[images][]" value="<?= $image['id_image'] ?>">
-                                            Supprimer cette image
-                                        </label>
-                                    </div>
-                                </div>
-                            <?php endforeach; ?>
-                            <!-- Upload de nouvelles images -->
-                            <div class="image-item new-item">
-                                <div class="form-group">
-                                    <label class="texte_dark_mode">Ajouter des images</label>
-                                    <div class="file-upload">
-                                        <button type="button" class="file-upload-button">Choisir des fichiers</button>
-                                        <span class="file-upload-label">Aucun fichier choisi</span>
-                                        <input type="file" name="images[]" multiple accept="image/*" 
-                                               class="input_form texte_dark_mode">
-                                    </div>
-                                    <input type="text" name="images_titre[]" placeholder="Titre de l'image" 
-                                           class="input_form texte_dark_mode">
-                                    <textarea name="images_texte[]" placeholder="Texte de l'image" 
-                                              class="input_form texte_dark_mode"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
+                        <button type="button" class="btn-restore add-item" onclick="addOutil()">Ajouter un outil</button>
+                    </div>
 
                     <div class="form-actions">
-                        <button type="submit" class="cta">Enregistrer les modifications</button>
-                        <a href="<?= BASE_PATH ?>/admin/projets/list.php" class="cta">Retour à la liste</a>
+                        <button type="submit" class="btn-reply">Enregistrer</button>
+                        <a href="<?= BASE_PATH ?>/admin/projets/list.php" class="btn-back">Annuler</a>
                     </div>
                 </form>
             </div>
@@ -345,28 +304,73 @@ include __DIR__ . '/../../config/inc/head.inc.php';
 
         <?php include __DIR__ . '/../../config/inc/footer.inc.php'; ?>
     </div>
-</body>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Gérer tous les inputs de type file
-    document.querySelectorAll('.file-upload input[type="file"]').forEach(function(input) {
-        input.addEventListener('change', function() {
-            const label = this.parentElement.querySelector('.file-upload-label');
-            if (this.multiple) {
-                label.textContent = this.files.length > 1 
-                    ? `${this.files.length} fichiers sélectionnés` 
-                    : this.files[0]?.name || 'Aucun fichier choisi';
-            } else {
-                label.textContent = this.files[0]?.name || 'Aucun fichier choisi';
-            }
-        });
 
-        // Cliquer sur le bouton déclenche l'input file
-        const button = input.parentElement.querySelector('.file-upload-button');
-        button.addEventListener('click', function() {
-            input.click();
-        });
-    });
-});
-</script>
+    <script src="<?= BASE_PATH ?>/assets/js/dark_mode.js"></script>
+    <script>
+        function createRemoveButton() {
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.className = 'btn-delete remove-item';
+            button.textContent = 'Supprimer';
+            button.onclick = function() {
+                this.closest('.dynamic-form-group').remove();
+            };
+            return button;
+        }
+
+        function addEtape() {
+            const container = document.getElementById('etapes-container');
+            const div = document.createElement('div');
+            div.className = 'dynamic-form-group';
+            div.innerHTML = `
+                <div class="form-group">
+                    <label>Description de l'étape</label>
+                    <textarea name="etapes[]" rows="3" required></textarea>
+                </div>
+            `;
+            div.appendChild(createRemoveButton());
+            container.appendChild(div);
+        }
+
+        function addImageContexte() {
+            const container = document.getElementById('images-contexte-container');
+            const div = document.createElement('div');
+            div.className = 'dynamic-form-group';
+            div.innerHTML = `
+                <div class="form-group">
+                    <label>Image</label>
+                    <input type="file" name="images_contexte[]" accept="image/*" required>
+                </div>
+                <div class="form-group">
+                    <label>Titre du contexte</label>
+                    <input type="text" name="titres_contexte[]" required>
+                </div>
+                <div class="form-group">
+                    <label>Texte du contexte</label>
+                    <textarea name="textes_contexte[]" rows="3" required></textarea>
+                </div>
+            `;
+            div.appendChild(createRemoveButton());
+            container.appendChild(div);
+        }
+
+        function addOutil() {
+            const container = document.getElementById('outils-container');
+            const div = document.createElement('div');
+            div.className = 'dynamic-form-group';
+            div.innerHTML = `
+                <div class="form-group">
+                    <label>Image de l'outil</label>
+                    <input type="file" name="images_outil[]" accept="image/*" required>
+                </div>
+                <div class="form-group">
+                    <label>Nom de l'outil</label>
+                    <input type="text" name="noms_outil[]" required>
+                </div>
+            `;
+            div.appendChild(createRemoveButton());
+            container.appendChild(div);
+        }
+    </script>
+</body>
 </html>

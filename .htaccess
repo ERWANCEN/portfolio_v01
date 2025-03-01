@@ -5,7 +5,10 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
 # Masquer les extensions de fichiers
-RewriteBase /
+RewriteBase /portfolio_v01/
+
+# Règle pour l'administration
+RewriteRule ^admin/([^/]+)/([^/]+)\.php$ admin/$1/$2.php [L,QSA]
 
 # Règle générique pour supprimer l'extension .php
 RewriteCond %{REQUEST_FILENAME} !-d
